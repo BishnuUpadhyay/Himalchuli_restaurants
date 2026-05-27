@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+    <meta name="description" content="Himalchuli Bar & Grill Corner page template.">
+    <meta name="keywords" content="Himalchuli, Restaurant, Himalchuli Bar & Grill">
+    <meta name="author" content="Bishnu">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Himalchuli Bar & Grill</title>
+    <link rel="icon" type="image/png" href="./images/Himalchuli_Logo.png">
+      <link rel="stylesheet" href="./style/main.css">
+      <script src="./js/menu.js"></script>
+      <script src="./js/chef.js"></script>
+<!-- <script src="./js/navbar.js" defer></script> -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<header>
+
+  <nav class="navbar">
+
+  <div class="nav-logo">
+
+    <img 
+      src="./images/Himalchuli_Logo.png" 
+      alt="Himalchuli Logo"
+    >
+
+    <div class="logo-text">
+    <h2>HIMALCHULI BAR & GRILL</h2>
+    <span>NEPALESE & INDIAN CUISINE</span>
+  </div>
+
+  </div>
+
+<div class="nav-toggle" id="navToggle">
+  ☰
+</div>
+
+<ul class="nav-links" id="navLinks">
+  <li><a href="#about">About</a></li>
+  <li><a href="#menu">Menu</a></li>
+  <li><a href="#chefs">Chefs</a></li>
+  <li><a href="#gallery">Gallery</a></li>
+  <li><a href="#contact">Contact</a></li>
+</ul>
+
+</nav>
+
+  <div class="hero">
+    <h1>Himalchuli <br> Bar & Grill</h1>
+
+    <p>
+      Authentic Himalayan & Indian Cuisine
+      with rich flavors and fresh ingredients.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="btn btn-primary">
+        View Menu
+      </button>
+
+      <button class="btn btn-light">
+        Order Online
+      </button>
+    </div>
+  </div>
+
+</header>
+
+<section id="about" class="about">
+  <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop" />
+  <div class="about-text">
+    <h2>Welcome to Himalchuli Bar & Grill</h2>
+    <p>
+      We serve authentic flavors from Nepal, Tibet, and India. Every dish is
+      prepared with traditional spices and fresh ingredients.
+    </p>
+  </div>
+</section>
+<section id="chefs" class="team-section">
+
+  <h2 class="section-title">Our Chefs</h2>
+
+  <div class="chef-slider" id="chefContainer"></div>
+
+</section>
+<section id="menu">
+  <h2  class="section-title">Our Menu</h2>
+  <div class="menu" id="menuContainer"></div>
+</section>
+
+<section id="gallery">
+  <h2 style="text-align:center; color:#f97316; margin-bottom:30px;">Food Gallery</h2>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d" />
+    <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe" />
+    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641" />
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div>
+    <h2>Contact Us</h2>
+    <p>📍 123 Main Street, VA</p>
+    <p>📞 (555) 123-4567</p>
+    <p>✉️ info@himalayangrill.com</p>
+  </div>
+
+  <div>
+    <h2>Reserve a Table</h2>
+    <input type="text" placeholder="Name" />
+    <input type="email" placeholder="Email" />
+    <input type="date" />
+    <textarea placeholder="Special Request"></textarea>
+    <button class="submit">Book Now</button>
+  </div>
+</section>
+
+<footer>
+  © 2026 Himalchuli Bar & Grill
+</footer>
+<script>
+  const toggle = document.getElementById("navToggle");
+const nav = document.getElementById("navLinks");
+  toggle.addEventListener("click", () => {
+  nav.classList.toggle("show");
+});
+const navLinks = document.querySelectorAll(".nav-links a");
+
+navLinks.forEach(link => {
+
+  link.addEventListener("click", () => {
+    nav.classList.remove("show");
+  });
+
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+[
+  {
+    "category": "Appetizers",
+    "items": [
+      {
+        "id": 1001,
+        "name": "Chicken Momos",
+        "price": 11.99,
+        "description": "Steamed Himalayan dumplings filled with seasoned chicken.",
+        "image": "momo.jpg"
+      },
+      {
+        "id": 1002,
+        "name": "Samosa",
+        "price": 6.99,
+        "description": "Crispy fried pastry filled with spiced potatoes.",
+        "image": "samosa.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Main Course",
+    "items": [
+      { 
+        "id": 2001,
+      "name": "Butter Chicken",
+       "price": 16.99,
+       "description": "",
+        "image": "butter_chicken.jpg"
+       },
+      { 
+        "id": 2002,
+      "name": "Lamb Curry",
+       "price": 18.99,
+      "description": "",
+        "image": "lamb_curry.jpg" 
+      }
+    ]
+  },
+  {
+    "category": "Drinks",
+    "items": [
+      { "id": 3001,
+      "name": "Mango Lassi",
+       "price": 4.99,
+       "description": "",
+        "image": "mango_lassi.jpg" 
+      },
+      { "id": 3002,
+      "name": "tea",
+       "price": 3.99,
+    "description": "",
+        "image": "tea.jpg" }
+    ]
+  }
+]

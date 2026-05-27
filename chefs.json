@@ -1,0 +1,25 @@
+[
+     {
+    "name": "Chef Himal",
+    "role": "Head Chef",
+    "image": "Chef1.jpg"
+  },
+
+  {
+    "name": "Chef Raj",
+    "role": "Tandoori Specialist",
+    "image": "Chef1.jpg"
+  },
+
+  {
+    "name": "Chef Maya",
+    "role": "Momo Expert",
+    "image": "Chef1.jpg"
+  },
+
+  {
+    "name": "Chef Arun",
+    "role": "Grill Master",
+    "image": "Chef1.jpg"
+  }
+]
