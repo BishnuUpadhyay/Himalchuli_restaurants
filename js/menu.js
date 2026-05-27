@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   loadMenu();
-  loadChefs();
+  // loadChefs();
 });
 
 /* =========================
    MENU LOADING
 ========================= */
 function loadMenu() {
-  fetch("menus.json")
+  fetch("menu.json")
     .then(res => res.json())
     .then(data => {
       console.log("Menu loaded once");
