@@ -9,13 +9,18 @@
     <title>Himalchuli Bar & Grill</title>
     <link rel="icon" type="image/png" href="./images/Himalchuli_Logo.png">
       <link rel="stylesheet" href="./style/main.css">
-      <script src="./js/menu.js"></script>
-      <script src="./js/chef.js"></script>
+      <script src="./js/menu.js" defer></script>
+      <script src="./js/chef.js" defer></script>
+      <script src="./js/hours.js" defer></script>
 <!-- <script src="./js/navbar.js" defer></script> -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 </head>
 <body>
+  <style>
+    
+
+  </style>
 
 <header>
 
@@ -109,6 +114,24 @@
     <p>✉️ info@himalayangrill.com</p>
   </div>
 
+<div class="hours-widget">
+  <span class="open-status">Loading...</span>
+
+  <button id="viewHoursBtn" class="hours-btn">
+    View All Hours
+  </button>
+</div>
+
+<!-- Hours Modal -->
+<div id="hoursModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+
+    <h2>Restaurant Hours</h2>
+
+    <div id="hoursTable"></div>
+  </div>
+</div>
   <div>
     <h2>Reserve a Table</h2>
     <input type="text" placeholder="Name" />

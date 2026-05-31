@@ -9,6 +9,9 @@
       background: #fff7ed;
       color: #333;
     }
+    body.modal-open {
+  overflow: hidden;
+}
 
     header {
   height: 90vh;
@@ -478,4 +481,89 @@ header{
     font-size:20px;
   }
 
+}
+
+.hours-btn{
+  margin-left:10px;
+  background:#f97316;
+  color:white;
+  border:none;
+  padding:8px 14px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  z-index:9999;
+}
+
+.modal.show{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content{
+  width:min(90%,600px);
+  background:white;
+  color:#111827;
+  border-radius:20px;
+  padding:25px;
+  position:relative;
+}
+
+.close-modal{
+  position:absolute;
+  right:20px;
+  top:10px;
+  font-size:30px;
+  cursor:pointer;
+}
+
+.hours-row{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+}
+
+.hours-row:last-child{
+  border-bottom:none;
+}
+
+.day-name{
+  font-weight:600;
+}
+
+.closed-day{
+  color:#dc2626;
+}
+
+@media(max-width:768px){
+  .hours-row{
+    flex-direction:column;
+    gap:5px;
+  }
+}
+
+.open-status{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:30px;
+  font-weight:600;
+  margin-top:10px;
+}
+
+.open-status.open{
+  background:#14532d;
+  color:#86efac;
+}
+
+.open-status.closed{
+  background:#7f1d1d;
+  color:#fca5a5;
 }
