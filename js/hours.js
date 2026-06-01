@@ -126,16 +126,18 @@ function buildHoursTable() {
       continue;
     }
 
-    const schedule = info.slots
-      .map(slot =>
-        `${formatTime(slot.start)} - ${formatTime(slot.end)}`
-      )
-      .join(" | ");
+   const schedule = info.slots
+  .map(slot =>
+    `<div>${formatTime(slot.start)} - ${formatTime(slot.end)}</div>`
+  )
+  .join("");
 
     html += `
       <div class="hours-row">
         <span class="day-name">${dayName}</span>
-        <span>${schedule}</span>
+        <div class="schedule-column">
+  ${schedule}
+</div>
       </div>
     `;
   }

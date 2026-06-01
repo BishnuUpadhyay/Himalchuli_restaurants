@@ -545,8 +545,9 @@ header{
 
 @media(max-width:768px){
   .hours-row{
-    flex-direction:column;
+    flex-direction:row;
     gap:5px;
+    font-size: 11px;
   }
 }
 
@@ -567,3 +568,28 @@ header{
   background:#7f1d1d;
   color:#fca5a5;
 }
+.hours-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  align-items: start;
+}
+
+.day-name {
+  font-weight: 700;
+}
+
+.hours-time {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+
+
+.schedule-column {
+  flex: 1;
+}
+
