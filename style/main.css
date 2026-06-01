@@ -214,6 +214,46 @@ header{
   padding-left:10px;
   transition:0.3s;
 }
+.menu-tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+.tab-btn{
+  padding:8px 14px;
+  border-radius:20px;
+  border:1px solid #f97316;
+  background:white;
+  cursor:pointer;
+  font-weight:500;
+}
+
+.tab-btn.active{
+  background:#f97316;
+  color:white;
+}
+
+.item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.item-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.item img{
+  width:40px;
+  height:40px;
+  object-fit:cover;
+  border-radius:8px;
+}
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
