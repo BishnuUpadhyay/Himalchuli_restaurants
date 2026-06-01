@@ -45,13 +45,16 @@ function loadMenu() {
 
 
 let allData = [];
-let activeCategory = "All";
+let activeCategory = null;
 
 function loadMenu() {
   fetch("menu.json")
     .then(res => res.json())
     .then(data => {
       allData = data;
+
+      // ✅ set first category as default
+      activeCategory = data[0].category;
 
       renderTabs(data);
       renderMenu(data);
@@ -64,8 +67,8 @@ function loadMenu() {
 function renderTabs(data){
   const tabs = document.getElementById("menuTabs");
 
-  const categories = ["All", ...data.map(d => d.category)];
-
+  // const categories = ["All", ...data.map(d => d.category)];
+const categories = [...data.map(d => d.category)];
   tabs.innerHTML = "";
 
   categories.forEach(cat => {
@@ -73,7 +76,7 @@ function renderTabs(data){
     btn.className = "tab-btn";
     btn.innerText = cat;
 
-    if(cat === activeCategory) btn.classList.add("active");
+if(cat === activeCategory) btn.classList.add("active");
 
     btn.addEventListener("click", () => {
       activeCategory = cat;
@@ -90,9 +93,9 @@ function renderMenu(data){
 
   data.forEach(section => {
 
-    if(activeCategory !== "All" && section.category !== activeCategory){
-      return;
-    }
+    if(activeCategory && section.category !== activeCategory){
+  return;
+}
 
     const card = document.createElement("div");
     card.className = "menu-card";
