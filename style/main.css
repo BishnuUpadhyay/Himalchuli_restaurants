@@ -217,23 +217,62 @@ header{
 }
 .menu-tabs{
   display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+  gap:12px;
+
+  overflow-x:auto;
+  white-space:nowrap;
+
+  padding:12px 10px;
   margin-bottom:20px;
+
+  background:#fff7ed;
+
+  position:sticky;
+  top:80px;
+  z-index:100;
+
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+}
+
+
+.menu-tabs::-webkit-scrollbar{
+  display:none;
+}
+
+/* fade hint on right (IMPORTANT for UX) */
+.menu-tabs::after{
+  content:"";
+  position:sticky;
+  right:0;
+  width:40px;
+  height:100%;
+  background:linear-gradient(to left, #fff7ed, transparent);
 }
 
 .tab-btn{
-  padding:8px 14px;
-  border-radius:20px;
+  flex:0 0 auto;
+  padding:10px 16px;
+  border-radius:25px;
+
   border:1px solid #f97316;
   background:white;
-  cursor:pointer;
+
+  font-size:14px;
   font-weight:500;
+
+  cursor:pointer;
+
+  scroll-snap-align:center;
+
+  transition:0.2s;
 }
 
+/* active tab */
 .tab-btn.active{
   background:#f97316;
   color:white;
+  transform:scale(1.05);
 }
 
 .item{
@@ -499,6 +538,7 @@ header{
   .menu{
     grid-template-columns:1fr;
   }
+  
 
   /* GALLERY */
   .gallery{
