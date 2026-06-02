@@ -218,17 +218,13 @@ header{
 .menu-tabs{
   display:flex;
   gap:12px;
-
   overflow-x:auto;
   white-space:nowrap;
-
   padding:12px 10px;
   margin-bottom:20px;
-
   background:#fff7ed;
-
   position:sticky;
-  top:80px;
+  top:76px;
   z-index:100;
 
   scroll-snap-type:x mandatory;
