@@ -9,6 +9,7 @@ import dishSekuwa from "@/assets/dish-sekuwa.jpg";
 import dishSamosa from "@/assets/dish-samosa.jpg";
 import dishPaneer from "@/assets/dish-paneer.jpg";
 import dishGobi from "@/assets/dish-gobi.jpg";
+import dishdefault from "@/assets/dish-default.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -22,12 +23,12 @@ const features = [
 ];
 
 const popular = [
-  { img: dishMomo, name: "Chicken Momo", price: "$11.99", desc: "Hand-folded steamed dumplings with tomato-sesame achar." },
-  { img: dishSekuwa, name: "Sekuwa Chicken", price: "$12.99", desc: "Nepali grilled chicken marinated in Himalayan herbs." },
-  { img: dishSamosa, name: "Samosa Chat", price: "$7.99", desc: "Crushed samosas topped with yogurt, chutneys and pomegranate." },
-  { img: dishTikka, name: "Butter Chicken", price: "$16.99", desc: "Tender chicken in a rich, creamy tomato butter sauce." },
-  { img: dishPaneer, name: "Paneer Tikka Masala", price: "$15.99", desc: "Grilled paneer cubes in a spiced tomato-onion gravy." },
-  { img: dishGobi, name: "Gobi Manchurian", price: "$10.99", desc: "Crispy cauliflower in Indo-Chinese garlic-chili sauce." },
+  { name: "Chicken Chilli", price: "$16.99", desc: "Crispy chicken cooked with onion, colored bell pepper, garlic, herbs and spices", img: dishdefault },
+  { name: "Tandoori Shrimp", price: "$19.99", desc: "Shrimp marinated in herbs, spices, mustard oil and sour cream; serve with grilled onion and bell peppers", img: dishdefault },
+  { name: "Mustang Aaloo", price: "$8.99", desc: "Boiled potatoes tossed with butter, oil and Nepalese herbs and spices", tag: "GF, Veg", img: dishdefault },
+  { name: "Chicken Chaumin", price: "$15.99", desc: "Tender chicken and noodles cooked with herbs and spices", img: dishdefault },
+  { name: "Chicken Sekuwa", price: "$15.99", desc: "Marinated chicken skewered and grilled in tandoor oven", tag: "VN, GF", img: dishdefault },
+  { name: "Tandoori Chicken", price: "$17.99", desc: "Half chicken marinated in herbs, spices, mustard oil and yogurt; serve with grilled onion and bell peppers", tag: "GF", img: dishdefault },
 ];
 
 const testimonials = [

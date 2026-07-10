@@ -6,6 +6,7 @@ import dishSekuwa from "@/assets/dish-sekuwa.jpg";
 import dishSamosa from "@/assets/dish-samosa.jpg";
 import dishPaneer from "@/assets/dish-paneer.jpg";
 import dishGobi from "@/assets/dish-gobi.jpg";
+import dishdefault from "@/assets/dish-default.png";
 
 export const Route = createFileRoute("/menu")({
   head: () => ({
@@ -22,36 +23,37 @@ export const Route = createFileRoute("/menu")({
 type Item = { name: string; price: string; desc: string; img?: string; tag?: string };
 
 const menu: Record<string, Item[]> = {
-  Starters: [
-    { name: "Chicken 65", price: "$11.99", desc: "Spicy South Indian style crispy chicken tossed with curry leaves.", img: dishSekuwa },
-    { name: "Gobi Manchurian", price: "$10.99", desc: "Vegan crispy cauliflower in Indo-Chinese garlic-chili sauce.", img: dishGobi, tag: "Vegan" },
-    { name: "Samosa Chat", price: "$7.99", desc: "Crushed samosas topped with yogurt, chutneys, and pomegranate.", img: dishSamosa },
-    { name: "Mix Vegetarian Pakora", price: "$6.99", desc: "Assorted vegetable fritters dipped in garbanzo batter.", tag: "Vegan" },
-  ],
-  "Momos & Nepali Specials": [
-    { name: "Chicken Momo (Steamed)", price: "$11.99", desc: "Hand-folded steamed dumplings with tomato-sesame achar.", img: dishMomo },
-    { name: "Buff Momo", price: "$12.99", desc: "Traditional Nepali water buffalo dumplings, richly spiced." },
-    { name: "Vegetable Momo", price: "$10.99", desc: "Cabbage, carrot and paneer momos with spicy dip.", tag: "Veg" },
-    { name: "Sekuwa Chicken", price: "$12.99", desc: "Nepali grilled chicken marinated with Himalayan herbs.", img: dishSekuwa },
-    { name: "Thukpa Noodle Soup", price: "$13.99", desc: "Tibetan hand-pulled noodles in aromatic broth." },
-  ],
-  "Tandoor & Grill": [
-    { name: "Tandoori Chicken (Half)", price: "$14.99", desc: "Overnight yogurt-marinated chicken from the clay oven." },
-    { name: "Seekh Kebab", price: "$13.99", desc: "Minced lamb skewers with fresh herbs." },
-    { name: "Paneer Tikka", price: "$12.99", desc: "Charred paneer with peppers and onion.", tag: "Veg" },
-  ],
-  Curries: [
-    { name: "Butter Chicken", price: "$16.99", desc: "Creamy tomato butter chicken.", img: dishTikka },
-    { name: "Chicken Curry", price: "$15.99", desc: "Traditional chicken curry with onion-tomato sauce." },
-    { name: "Paneer Tikka Masala", price: "$15.99", desc: "Grilled paneer cubes in creamy tomato onion sauce.", img: dishPaneer, tag: "Veg" },
-    { name: "Vegetable Vindaloo", price: "$14.99", desc: "Spicy tangy Goan-style curry.", tag: "Vegan" },
-    { name: "Vegetable Curry", price: "$13.99", desc: "Seasonal vegetables in onion-tomato gravy.", tag: "Vegan" },
-  ],
-  "Breads & Rice": [
-    { name: "Garlic Naan", price: "$3.99", desc: "Clay-oven flatbread brushed with garlic butter." },
-    { name: "Plain Basmati Rice", price: "$3.49", desc: "Fluffy long-grain rice." },
-    { name: "Chicken Biryani", price: "$16.99", desc: "Fragrant basmati layered with spiced chicken." },
-  ],
+  // Starters: [
+  //   { name: "Chicken 65", price: "$11.99", desc: "Spicy South Indian style crispy chicken tossed with curry leaves.", img: dishSekuwa },
+  //   { name: "Gobi Manchurian", price: "$10.99", desc: "Vegan crispy cauliflower in Indo-Chinese garlic-chili sauce.", img: dishGobi, tag: "Vegan" },
+  //   { name: "Samosa Chat", price: "$7.99", desc: "Crushed samosas topped with yogurt, chutneys, and pomegranate.", img: dishSamosa },
+  //   { name: "Mix Vegetarian Pakora", price: "$6.99", desc: "Assorted vegetable fritters dipped in garbanzo batter.", tag: "Vegan" },
+  // ],
+ Appetizers: [
+  { name: "Lentil Soup", price: "$7.99", desc: "Mixed red and black lentils cooked in Indian herbs and spices", tag: "Veg, VN, GF", img: dishdefault },
+  { name: "Vegetable Samosa", price: "$6.99", desc: "Triangular Indian pastries stuffed with potatoes, green peas, mild herbs and spices", tag: "VN, Veg", img: dishdefault },
+  { name: "Mixed Veg Pakoda", price: "$8.99", desc: "Crispy, deep-fried Indian fritters, shredded vegetables dipped in a chickpea flour batter", tag: "VN, GF, Veg", img: dishdefault },
+  { name: "Mustang Aaloo", price: "$8.99", desc: "Boiled potatoes tossed with butter, oil and Nepalese herbs and spices", tag: "GF, Veg", img: dishdefault },
+  { name: "Spinach Chat", price: "$9.99", desc: "Crispy, deep-fried Indian fritters, dipped in a chickpea flour batter", tag: "VN, Veg, GF", img: dishdefault },
+  { name: "Govi Manchurian", price: "$10.99", desc: "Crispy cauliflower tossed in a spicy, sweet and tangy sauce with soy sauce, vinegar and chilli sauce", tag: "Veg, VN", img: dishdefault },
+  { name: "Chicken 65", price: "$12.99", desc: "Crispy chicken with mustard seeds, whole chilli peppers, fresh garlic, ginger, curry leaf, chopped onion and cilantro", tag: "VN", img: dishdefault },
+],
+Nepalese_Cuisine: [
+  { name: "Veg Chaumin", price: "$13.99", desc: "Shredded vegetables and noodles cooked with herbs and spices", img: dishdefault },
+  { name: "Lamb Chaumin", price: "$16.99", desc: "Tender lamb and noodles cooked with herbs and spices", img: dishdefault },
+  { name: "Chicken Chaumin", price: "$15.99", desc: "Tender chicken and noodles cooked with herbs and spices", img: dishdefault },
+  { name: "Shrimp Chaumin", price: "$17.99", desc: "Tiger shrimp and noodles cooked with herbs and spices", img: dishdefault },
+  { name: "Chicken Sekuwa", price: "$15.99", desc: "Marinated chicken skewered and grilled in tandoor oven", tag: "VN, GF", img: dishdefault },
+  { name: "Chicken Choilla", price: "$15.99", desc: "Grilled chicken tossed with mustard oil, fenugreek seeds, green chilli, spring onion and turmeric; mixed with spring onion, Szechuan pepper, sliced ginger, garlic and cilantro", img: dishdefault },
+],
+Tandoori_Entrees: [
+  { name: "Chicken Chilli", price: "$16.99", desc: "Crispy chicken cooked with onion, colored bell pepper, garlic, herbs and spices", img: dishdefault },
+  { name: "Tandoori Chicken", price: "$17.99", desc: "Half chicken marinated in herbs, spices, mustard oil and yogurt; serve with grilled onion and bell peppers", tag: "GF", img: dishdefault },
+  { name: "Chicken Tikka", price: "$16.99", desc: "Boneless chicken pieces marinated in herbs, spices, mustard oil and sour cream; serve with grilled onion and bell peppers", tag: "GF", img: dishdefault },
+  { name: "Tandoori Salmon", price: "$21.99", desc: "Salmon marinated in herbs, spices, mustard oil and sour cream; serve with grilled onion and bell peppers", tag: "GF", img: dishdefault },
+  { name: "Lamb Seekh Kebab", price: "$18.99", desc: "Minced lamb marinated with ginger, garlic paste, herbs and spices", tag: "GF", img: dishdefault },
+  { name: "Tandoori Shrimp", price: "$19.99", desc: "Shrimp marinated in herbs, spices, mustard oil and sour cream; serve with grilled onion and bell peppers", img: dishdefault },
+],
 };
 
 const categories = Object.keys(menu);
