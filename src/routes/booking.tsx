@@ -35,9 +35,9 @@ function BookingPage() {
             Tell us when and how many — we'll confirm within an hour during opening times. For parties of 8 or more, please call us directly at (202) 555-0142.
           </p>
           <div className="mt-8 space-y-4 text-sm">
-            <div><span className="font-semibold uppercase tracking-wider text-primary">Address · </span>123 Mountain View Ave, Washington DC</div>
+            <div><span className="font-semibold uppercase tracking-wider text-primary">Address · </span>36 Plaistow RD, Haverhill, MA 01830</div>
             <div><span className="font-semibold uppercase tracking-wider text-primary">Hours · </span>Daily 11:30 – 22:00 (later on Fri–Sat)</div>
-            <div><span className="font-semibold uppercase tracking-wider text-primary">Phone · </span>(202) 555-0142</div>
+            <div><span className="font-semibold uppercase tracking-wider text-primary">Phone · </span>(224) 900-0144</div>
           </div>
         </div>
 
