@@ -146,22 +146,93 @@ const menu: Record<string, Item[]> = {
 
 const categories = Object.keys(menu);
 
+// function MenuPage() {
+//   const [active, setActive] = useState(categories[0]);
+//   const items = menu[active];
+// const formatLabel = (str: any) =>
+//     str.toLowerCase().replace(/_/g, " ")
+//       .replace(/\b\w/g, (char : any) => char.toUpperCase());
+//   return (
+//     <>
+//       <section className="bg-surface py-20 text-center">
+//         <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">Our Menu</p>
+//         <h1 className="mt-3 font-display text-5xl font-bold uppercase tracking-wide text-white md:text-6xl">Explore the Flavors</h1>
+//         <p className="mx-auto mt-4 max-w-xl px-4 text-white/70">A curated selection of Himalayan and Indian classics.</p>
+//       </section>
+
+//       <section className="mx-auto max-w-7xl px-4 py-4 md:px-8 md:py-12">
+//         <div className="flex overflow-x-auto gap-2 pb-3 scrollbar-none md:flex-wrap md:justify-center">
+//           {categories.map((c) => (
+//             <button
+//               key={c}
+//               onClick={() => setActive(c)}
+//               className={
+//                 "shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wider transition md:px-5 md:py-2.5 " +
+//                 (active === c
+//                   ? "border-primary bg-primary text-primary-foreground"
+//                   : "border-border bg-card text-foreground hover:border-primary hover:text-primary")
+//               }
+//             >
+//               {formatLabel(c)}
+//             </button>
+//           ))}
+//         </div>
+
+//         <div className="mt-12 grid gap-6 md:grid-cols-2">
+//           {items.map((i) => (
+//             <div key={i.name} className="flex gap-5 rounded-xl border border-border bg-card p-5 shadow-sm">
+//               {i.img ? (
+//                 <img src={i.img} alt={i.name} width={200} height={200} loading="lazy" className="h-24 w-24 shrink-0 rounded-lg object-cover" />
+//               ) : (
+//                 <div className="grid h-24 w-24 shrink-0 place-items-center rounded-lg bg-secondary text-primary font-display text-2xl">✦</div>
+//               )}
+//               <div className="min-w-0 flex-1">
+//                 <div className="flex items-baseline justify-between gap-3">
+//                   <h3 className="font-display text-lg font-semibold uppercase tracking-wide">{i.name}</h3>
+//                   <span className="font-display text-lg font-bold text-primary">{i.price}</span>
+//                 </div>
+//                 {i.tag && <span className="mt-1 inline-block rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">{i.tag}</span>}
+//                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{i.desc}</p>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </section>
+//     </>
+//   );
+// }
+
+
+
 function MenuPage() {
   const [active, setActive] = useState(categories[0]);
   const items = menu[active];
-const formatLabel = (str: any) =>
-    str.toLowerCase().replace(/_/g, " ")
-      .replace(/\b\w/g, (char : any) => char.toUpperCase());
+
+  const formatLabel = (str: any) =>
+    str
+      .toLowerCase()
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (char: any) => char.toUpperCase());
+
   return (
     <>
+      {/* Header Section */}
       <section className="bg-surface py-20 text-center">
-        <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">Our Menu</p>
-        <h1 className="mt-3 font-display text-5xl font-bold uppercase tracking-wide text-white md:text-6xl">Explore the Flavors</h1>
-        <p className="mx-auto mt-4 max-w-xl px-4 text-white/70">A curated selection of Himalayan and Indian classics.</p>
+        <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">
+          Our Menu
+        </p>
+        <h1 className="mt-3 font-display text-5xl font-bold uppercase tracking-wide text-white md:text-6xl">
+          Explore the Flavors
+        </h1>
+        <p className="mx-auto mt-4 max-w-xl px-4 text-white/70">
+          A curated selection of Himalayan and Indian classics.
+        </p>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-4 md:px-8 md:py-12">
-        <div className="flex overflow-x-auto gap-2 pb-3 scrollbar-none md:flex-wrap md:justify-center">
+      {/* Main Content Section */}
+      <section className="mx-auto max-w-5xl px-4 py-8 md:px-8 md:py-12">
+        {/* Category Selector */}
+        <div className="flex overflow-x-auto gap-2 pb-6 scrollbar-none md:flex-wrap md:justify-center">
           {categories.map((c) => (
             <button
               key={c}
@@ -178,24 +249,53 @@ const formatLabel = (str: any) =>
           ))}
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {items.map((i) => (
-            <div key={i.name} className="flex gap-5 rounded-xl border border-border bg-card p-5 shadow-sm">
-              {i.img ? (
-                <img src={i.img} alt={i.name} width={200} height={200} loading="lazy" className="h-24 w-24 shrink-0 rounded-lg object-cover" />
-              ) : (
-                <div className="grid h-24 w-24 shrink-0 place-items-center rounded-lg bg-secondary text-primary font-display text-2xl">✦</div>
-              )}
-              <div className="min-w-0 flex-1">
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="font-display text-lg font-semibold uppercase tracking-wide">{i.name}</h3>
-                  <span className="font-display text-lg font-bold text-primary">{i.price}</span>
+        {/* Menu Section Card */}
+        <div className="mt-6 rounded-2xl border border-border/50 bg-card/80 p-6 shadow-md md:p-10">
+          {/* Section Heading with Divider */}
+          <div className="mb-8 flex items-center gap-4">
+            <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">
+              {formatLabel(active)}
+            </h2>
+            <div className="h-[1px] flex-1 bg-border/60" />
+          </div>
+
+          {/* Items List */}
+          <div className="space-y-6">
+            {items.map((i) => (
+              <div key={i.name} className="group">
+                {/* Title, Dotted Line, and Price */}
+                <div className="flex items-baseline gap-2">
+                  <h3 className="font-display text-base font-semibold text-foreground md:text-lg">
+                    {i.name}
+                  </h3>
+                  
+                  {/* Tag Badge next to title */}
+                  {i.tag && (
+                    <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                      {i.tag}
+                    </span>
+                  )}
+
+                  {/* Dotted Leader Line */}
+                  <div className="flex-1 border-b border-dotted border-muted-foreground/40 text-transparent">
+                    .
+                  </div>
+
+                  {/* Price */}
+                  <span className="font-display text-base font-bold text-primary md:text-lg">
+                    {i.price}
+                  </span>
                 </div>
-                {i.tag && <span className="mt-1 inline-block rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">{i.tag}</span>}
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{i.desc}</p>
+
+                {/* Description */}
+                {i.desc && (
+                  <p className="mt-1 text-xs text-muted-foreground md:text-sm">
+                    {i.desc}
+                  </p>
+                )}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
     </>
