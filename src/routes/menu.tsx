@@ -23,37 +23,125 @@ export const Route = createFileRoute("/menu")({
 type Item = { name: string; price: string; desc: string; img?: string; tag?: string };
 
 const menu: Record<string, Item[]> = {
-  // Starters: [
-  //   { name: "Chicken 65", price: "$11.99", desc: "Spicy South Indian style crispy chicken tossed with curry leaves.", img: dishSekuwa },
-  //   { name: "Gobi Manchurian", price: "$10.99", desc: "Vegan crispy cauliflower in Indo-Chinese garlic-chili sauce.", img: dishGobi, tag: "Vegan" },
-  //   { name: "Samosa Chat", price: "$7.99", desc: "Crushed samosas topped with yogurt, chutneys, and pomegranate.", img: dishSamosa },
-  //   { name: "Mix Vegetarian Pakora", price: "$6.99", desc: "Assorted vegetable fritters dipped in garbanzo batter.", tag: "Vegan" },
-  // ],
- Appetizers: [
-  { name: "Lentil Soup", price: "$7.99", desc: "Mixed red and black lentils cooked in Indian herbs and spices", tag: "Veg, VN, GF", img: dishdefault },
-  { name: "Vegetable Samosa", price: "$6.99", desc: "Triangular Indian pastries stuffed with potatoes, green peas, mild herbs and spices", tag: "VN, Veg", img: dishdefault },
-  { name: "Mixed Veg Pakoda", price: "$8.99", desc: "Crispy, deep-fried Indian fritters, shredded vegetables dipped in a chickpea flour batter", tag: "VN, GF, Veg", img: dishdefault },
-  { name: "Mustang Aaloo", price: "$8.99", desc: "Boiled potatoes tossed with butter, oil and Nepalese herbs and spices", tag: "GF, Veg", img: dishdefault },
-  { name: "Spinach Chat", price: "$9.99", desc: "Crispy, deep-fried Indian fritters, dipped in a chickpea flour batter", tag: "VN, Veg, GF", img: dishdefault },
-  { name: "Govi Manchurian", price: "$10.99", desc: "Crispy cauliflower tossed in a spicy, sweet and tangy sauce with soy sauce, vinegar and chilli sauce", tag: "Veg, VN", img: dishdefault },
-  { name: "Chicken 65", price: "$12.99", desc: "Crispy chicken with mustard seeds, whole chilli peppers, fresh garlic, ginger, curry leaf, chopped onion and cilantro", tag: "VN", img: dishdefault },
-],
-Nepalese_Cuisine: [
-  { name: "Veg Chaumin", price: "$13.99", desc: "Shredded vegetables and noodles cooked with herbs and spices", img: dishdefault },
-  { name: "Lamb Chaumin", price: "$16.99", desc: "Tender lamb and noodles cooked with herbs and spices", img: dishdefault },
-  { name: "Chicken Chaumin", price: "$15.99", desc: "Tender chicken and noodles cooked with herbs and spices", img: dishdefault },
-  { name: "Shrimp Chaumin", price: "$17.99", desc: "Tiger shrimp and noodles cooked with herbs and spices", img: dishdefault },
-  { name: "Chicken Sekuwa", price: "$15.99", desc: "Marinated chicken skewered and grilled in tandoor oven", tag: "VN, GF", img: dishdefault },
-  { name: "Chicken Choilla", price: "$15.99", desc: "Grilled chicken tossed with mustard oil, fenugreek seeds, green chilli, spring onion and turmeric; mixed with spring onion, Szechuan pepper, sliced ginger, garlic and cilantro", img: dishdefault },
-],
-Tandoori_Entrees: [
-  { name: "Chicken Chilli", price: "$16.99", desc: "Crispy chicken cooked with onion, colored bell pepper, garlic, herbs and spices", img: dishdefault },
-  { name: "Tandoori Chicken", price: "$17.99", desc: "Half chicken marinated in herbs, spices, mustard oil and yogurt; serve with grilled onion and bell peppers", tag: "GF", img: dishdefault },
-  { name: "Chicken Tikka", price: "$16.99", desc: "Boneless chicken pieces marinated in herbs, spices, mustard oil and sour cream; serve with grilled onion and bell peppers", tag: "GF", img: dishdefault },
-  { name: "Tandoori Salmon", price: "$21.99", desc: "Salmon marinated in herbs, spices, mustard oil and sour cream; serve with grilled onion and bell peppers", tag: "GF", img: dishdefault },
-  { name: "Lamb Seekh Kebab", price: "$18.99", desc: "Minced lamb marinated with ginger, garlic paste, herbs and spices", tag: "GF", img: dishdefault },
-  { name: "Tandoori Shrimp", price: "$19.99", desc: "Shrimp marinated in herbs, spices, mustard oil and sour cream; serve with grilled onion and bell peppers", img: dishdefault },
-],
+  Appetizers: [
+    { name: "Lentil Soup", price: "$5.99", desc: "", img: dishdefault },
+    { name: "Vegetable Samosa", price: "$5.99", desc: "", img: dishdefault },
+    { name: "Mixed Veg Pakoda", price: "$7.99", desc: "", img: dishdefault },
+    { name: "Samosa Chat", price: "$11.99", desc: "", img: dishdefault },
+    { name: "Gobi Manchurian", price: "$11.99", desc: "", img: dishdefault },
+    { name: "Chicken 65", price: "$13.99", desc: "", img: dishdefault },
+    { name: "Chicken Chilli", price: "$13.99", desc: "", img: dishdefault }
+  ],
+
+  Nepalese_Cuisine: [
+    { name: "Veg Chowmein", price: "$13.99", desc: "", img: dishdefault },
+    { name: "Chicken Chowmein", price: "$15.99", desc: "", img: dishdefault },
+    { name: "Shrimp Chowmein", price: "$16.99", desc: "", img: dishdefault },
+    { name: "Chicken Sekuwa", price: "$15.99", desc: "", img: dishdefault },
+    { name: "Chicken Choila", price: "$15.99", desc: "", img: dishdefault },
+    { name: "Steamed Veg Momo", price: "$15.99", desc: "Preparation: Steamed", img: dishdefault },
+    { name: "Fried Veg Momo", price: "$16.99", desc: "Preparation: Fried", img: dishdefault },
+    { name: "Chilli Veg Momo", price: "$17.99", desc: "Preparation: Chilli", img: dishdefault },
+    { name: "Steamed Chicken Momo", price: "$15.99", desc: "Preparation: Steamed", img: dishdefault },
+    { name: "Fried Chicken Momo", price: "$17.99", desc: "Preparation: Fried", img: dishdefault },
+    { name: "Chilli Chicken Momo", price: "$18.99", desc: "Preparation: Chilli", img: dishdefault },
+    { name: "Mustang Aloo", price: "$11.99", desc: "", img: dishdefault }
+  ],
+
+  Tandoori_Entrees: [
+    { name: "Tandoori Chicken", price: "$18.99", desc: "", img: dishdefault },
+    { name: "Chicken Tikka", price: "$18.99", desc: "", img: dishdefault },
+    { name: "Tandoori Salmon", price: "$24.99", desc: "", img: dishdefault },
+    { name: "Lamb Chop", price: "$24.99", desc: "", img: dishdefault },
+    { name: "Tandoori Shrimp", price: "$20.99", desc: "", img: dishdefault },
+    { name: "Paneer Tikka Tandoor", price: "$21.99", desc: "", img: dishdefault }
+  ],
+
+  Vegetable_Entrees: [
+    { name: "Vegetable Korma", price: "$16.99", desc: "", img: dishdefault },
+    { name: "Paneer Tikka Masala", price: "$18.99", desc: "", img: dishdefault },
+    { name: "Saag Paneer", price: "$16.99", desc: "", img: dishdefault },
+    { name: "Chana Saag", price: "$16.99", desc: "", img: dishdefault },
+    { name: "Chana Masala", price: "$15.99", desc: "", img: dishdefault },
+    { name: "Bhindi Masala", price: "$15.99", desc: "", img: dishdefault },
+    { name: "Baigan Bharta", price: "$15.99", desc: "", img: dishdefault },
+    { name: "Dal Makhani", price: "$16.99", desc: "", img: dishdefault },
+    { name: "Dal Tadka", price: "$15.99", desc: "", img: dishdefault },
+    { name: "Aloo Gobi", price: "$15.99", desc: "", img: dishdefault },
+    { name: "Vegetable Vindaloo", price: "$15.99", desc: "", img: dishdefault },
+    { name: "Veg Curry", price: "$15.99", desc: "", img: dishdefault }
+  ],
+
+  Chicken_Entrees: [
+    { name: "Chicken Curry", price: "$17.99", desc: "", img: dishdefault },
+    { name: "Butter Chicken", price: "$18.99", desc: "", img: dishdefault },
+    { name: "Chicken Tikka Masala", price: "$18.99", desc: "", img: dishdefault },
+    { name: "Chicken Vindaloo", price: "$17.99", desc: "", img: dishdefault },
+    { name: "Chicken with Veg Curry", price: "$17.99", desc: "", img: dishdefault },
+    { name: "Chicken Madras", price: "$17.99", desc: "", img: dishdefault },
+    { name: "Chicken Korma", price: "$17.99", desc: "", img: dishdefault },
+    { name: "Chicken Saag", price: "$18.99", desc: "", img: dishdefault },
+    { name: "Chicken Dhansak Korma", price: "$17.99", desc: "", img: dishdefault }
+  ],
+
+  Lamb_Entrees: [
+    { name: "Lamb Curry", price: "$19.99", desc: "", img: dishdefault },
+    { name: "Lamb Vindaloo", price: "$19.99", desc: "", img: dishdefault },
+    { name: "Lamb Korma", price: "$19.99", desc: "", img: dishdefault },
+    { name: "Lamb Saag", price: "$20.99", desc: "", img: dishdefault },
+    { name: "Lamb with Veg Curry", price: "$19.99", desc: "", img: dishdefault },
+    { name: "Lamb Tikka Masala", price: "$20.99", desc: "", img: dishdefault },
+    { name: "Lamb Madras", price: "$19.99", desc: "", img: dishdefault }
+  ],
+
+  Shrimp_Entrees: [
+    { name: "Shrimp Curry", price: "$20.99", desc: "", img: dishdefault },
+    { name: "Shrimp with Veg Curry", price: "$20.99", desc: "", img: dishdefault },
+    { name: "Shrimp Madras", price: "$20.99", desc: "", img: dishdefault },
+    { name: "Shrimp Vindaloo", price: "$20.99", desc: "", img: dishdefault },
+    { name: "Shrimp Korma", price: "$20.99", desc: "", img: dishdefault },
+    { name: "Shrimp Masala", price: "$21.99", desc: "", img: dishdefault }
+  ],
+
+  Biryani_And_Rice: [
+    { name: "Plain White Rice", price: "$4.00", desc: "", img: dishdefault },
+    { name: "Vegetable Biryani", price: "$16.99", desc: "", img: dishdefault },
+    { name: "Chicken Biryani", price: "$17.99", desc: "", img: dishdefault },
+    { name: "Lamb Biryani", price: "$19.99", desc: "", img: dishdefault },
+    { name: "Shrimp Biryani", price: "$20.99", desc: "", img: dishdefault }
+  ],
+
+  Breads: [
+    { name: "Naan", price: "$4.00", desc: "", img: dishdefault },
+    { name: "Garlic Naan", price: "$5.00", desc: "", img: dishdefault },
+    { name: "Coconut Naan", price: "$5.50", desc: "", img: dishdefault },
+    { name: "Aloo Naan", price: "$5.00", desc: "", img: dishdefault },
+    { name: "Onion Kulcha", price: "$5.00", desc: "", img: dishdefault },
+    { name: "Roti", price: "$4.00", desc: "", img: dishdefault },
+    { name: "Aloo Paratha", price: "$5.00", desc: "", img: dishdefault },
+    { name: "Lachha Paratha", price: "$5.00", desc: "", img: dishdefault },
+    { name: "Bread Basket", price: "$14.00", desc: "", img: dishdefault }
+  ],
+
+  Desserts: [
+    { name: "Gulab Jamun", price: "$5.00", desc: "", img: dishdefault },
+    { name: "Kheer", price: "$5.00", desc: "", img: dishdefault },
+    { name: "Gajar Halwa", price: "$6.00", desc: "", img: dishdefault }
+  ],
+
+  Beverages: [
+    { name: "Soda Can", price: "$2.00", desc: "", img: dishdefault },
+    { name: "Mango Lassi", price: "$4.99", desc: "", img: dishdefault },
+    { name: "Milk Tea", price: "$3.50", desc: "", img: dishdefault },
+    { name: "Black Tea", price: "$2.99", desc: "", img: dishdefault }
+  ],
+
+  Sauces_And_Pickles: [
+    { name: "Tamarind Sauce, 8 oz.", price: "$4.99", desc: "", img: dishdefault },
+    { name: "Green Chutney, 8 oz.", price: "$4.99", desc: "", img: dishdefault },
+    { name: "Mango Chutney, 8 oz.", price: "$4.99", desc: "", img: dishdefault },
+    { name: "Raita, 8 oz.", price: "$4.00", desc: "", img: dishdefault }
+  ]
 };
 
 const categories = Object.keys(menu);
