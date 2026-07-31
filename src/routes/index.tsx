@@ -92,7 +92,7 @@ function Index() {
           <p className="mt-4 leading-relaxed text-muted-foreground">
             From meticulously hand-folded momos to the deep, smoky notes of our clay tandoor, every dish is crafted with purpose — hand-ground spices, fresh produce and heritage techniques for a perfect balance of comfort and flavor.
           </p>
-          <div className="mt-8 grid grid-cols-2 gap-6">
+          {/* <div className="mt-8 grid grid-cols-2 gap-6">
             <div>
               <div className="font-display text-5xl font-bold text-primary">15+</div>
               <div className="mt-1 text-sm uppercase tracking-wider text-muted-foreground">Years of Experience</div>
@@ -101,7 +101,7 @@ function Index() {
               <div className="font-display text-5xl font-bold text-primary">50+</div>
               <div className="mt-1 text-sm uppercase tracking-wider text-muted-foreground">Signature Dishes</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
