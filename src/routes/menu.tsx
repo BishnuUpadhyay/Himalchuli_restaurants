@@ -149,7 +149,9 @@ const categories = Object.keys(menu);
 function MenuPage() {
   const [active, setActive] = useState(categories[0]);
   const items = menu[active];
-
+const formatLabel = (str: any) =>
+    str.toLowerCase().replace(/_/g, " ")
+      .replace(/\b\w/g, (char : any) => char.toUpperCase());
   return (
     <>
       <section className="bg-surface py-20 text-center">
@@ -158,20 +160,20 @@ function MenuPage() {
         <p className="mx-auto mt-4 max-w-xl px-4 text-white/70">A curated selection of Himalayan and Indian classics.</p>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-        <div className="flex flex-wrap justify-center gap-3">
+      <section className="mx-auto max-w-7xl px-4 py-4 md:px-8 md:py-12">
+        <div className="flex overflow-x-auto gap-2 pb-3 scrollbar-none md:flex-wrap md:justify-center">
           {categories.map((c) => (
             <button
               key={c}
               onClick={() => setActive(c)}
               className={
-                "rounded-full border px-5 py-2.5 text-sm font-semibold uppercase tracking-wider transition " +
+                "shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wider transition md:px-5 md:py-2.5 " +
                 (active === c
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border bg-card text-foreground hover:border-primary hover:text-primary")
               }
             >
-              {c}
+              {formatLabel(c)}
             </button>
           ))}
         </div>
