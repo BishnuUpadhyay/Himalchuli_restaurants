@@ -10,7 +10,9 @@ import dishSamosa from "@/assets/dish-samosa.jpg";
 import dishPaneer from "@/assets/dish-paneer.jpg";
 import dishGobi from "@/assets/dish-gobi.jpg";
 import dishdefault from "@/assets/dish-default.png";
+import OpeningSoon from "./openingSoon";
 
+const openingSoon = true;
 export const Route = createFileRoute("/")({
   component: Index,
 });
@@ -38,6 +40,9 @@ const testimonials = [
 ];
 
 function Index() {
+    if (openingSoon) {
+    return <OpeningSoon />;
+  }
   return (
     <>
       {/* Hero */}
