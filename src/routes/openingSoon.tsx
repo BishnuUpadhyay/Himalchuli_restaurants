@@ -58,6 +58,21 @@ export default function OpeningSoon() {
             Thursday • August 7
           </span>
         </div>
+        <div className="mt-8 space-y-3">
+  <a
+    href="tel:9782414259"
+    className="block text-xl font-semibold text-white transition hover:text-primary"
+  >
+    📞 (978) 241-4259
+  </a>
+
+  <a
+    href="mailto:himalchuli2026@gmail.com"
+    className="block text-lg text-gray-300 transition hover:text-primary"
+  >
+    ✉️ himalchuli2026@gmail.com
+  </a>
+</div>
       </div>
     </div>
   );
