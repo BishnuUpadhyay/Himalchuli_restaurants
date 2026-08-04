@@ -49,7 +49,7 @@ export default function OpeningSoon() {
           </span>
           .
           <br />
-          Join us for authentic Nepalese, Indian & Tibetan cuisine.
+          Join us for authentic Nepalese & Indian cuisine.
         </p>
 
         <div className="mt-10 inline-flex items-center gap-3 rounded-full border border-primary/40 bg-white/10 px-8 py-4 backdrop-blur">
