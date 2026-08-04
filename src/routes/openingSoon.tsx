@@ -64,7 +64,7 @@ export default function OpeningSoon() {
           {/* Badge */}
           <div className="mt-4 inline-flex rounded-full border border-amber-400/40 bg-white/10 px-5 py-2 backdrop-blur sm:px-6 sm:py-2.5">
             <span className="text-xs font-semibold text-white sm:text-sm">
-              Opening on Saturday • August 7
+              Opening on Saturday • August 8
             </span>
           </div>
 
