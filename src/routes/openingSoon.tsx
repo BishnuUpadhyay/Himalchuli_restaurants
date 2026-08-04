@@ -31,7 +31,7 @@ export default function OpeningSoon() {
         />
 
         <p className="tracking-[8px] uppercase text-primary">
-          Grand Opening
+          Soft Opening
         </p>
 
         <h1 className="mt-5 text-6xl font-black uppercase text-white">
