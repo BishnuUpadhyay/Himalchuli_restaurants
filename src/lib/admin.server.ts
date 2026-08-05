@@ -3,7 +3,19 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 export type AppRole = "owner" | "manager" | "staff";
 
+// Resolves the caller's role. Returns null (no access) if the account has no
+// role assigned yet, OR if an owner has disabled the linked staff_members row.
+// This is the single choke point enforcing "disabled staff can't do anything",
+// even if their Supabase session/JWT is still technically valid.
 export async function getRole(userId: string): Promise<AppRole | null> {
+  const { data: staff } = await supabaseAdmin
+    .from("staff_members")
+    .select("is_active")
+    .eq("user_id", userId)
+    .maybeSingle();
+
+  if (staff && staff.is_active === false) return null;
+
   const { data } = await supabaseAdmin
     .from("user_roles")
     .select("role")
@@ -17,7 +29,7 @@ export async function getRole(userId: string): Promise<AppRole | null> {
 
 export async function requireStaff(userId: string): Promise<AppRole> {
   const role = await getRole(userId);
-  if (!role) throw new Error("Forbidden: your account has no staff access yet.");
+  if (!role) throw new Error("Forbidden: your account has no staff access, or it has been disabled.");
   return role;
 }
 

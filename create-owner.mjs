@@ -15,7 +15,6 @@
 // Or interactively (it will prompt for anything missing):
 //   node create-owner.mjs
 //
-// admin@admin.com  "Str0ng!Pass123"  
 // Install the one dependency first if you don't already have it:
 //   npm install @supabase/supabase-js
 
@@ -121,8 +120,8 @@ async function main() {
   if ((existingRoles ?? 0) > 0 && !args.force) {
     console.error(
       `This project already has ${existingRoles} role assignment(s). ` +
-      "If you really want to force-create another owner, re-run with --force. " +
-      "Otherwise, sign in as an existing owner and use Settings → Team → Send invite instead.",
+        "If you really want to force-create another owner, re-run with --force. " +
+        "Otherwise, sign in as an existing owner and use Settings → Team → Send invite instead.",
     );
     process.exit(1);
   }

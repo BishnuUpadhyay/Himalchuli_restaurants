@@ -15,7 +15,7 @@ export const getBookingConfig = createServerFn({ method: "GET" }).handler(async 
 });
 
 export const getAvailability = createServerFn({ method: "POST" })
-  .inputValidator((input: { date: string; guestCount: number; location?: string | null }) => input)
+  .validator((input: { date: string; guestCount: number; location?: string | null }) => input)
   .handler(async ({ data }): Promise<{ slots: TimeSlot[]; closed: boolean; note?: string }> => {
     const { buildAvailability } = await import("./reservation-engine.server");
     return buildAvailability(
@@ -26,7 +26,7 @@ export const getAvailability = createServerFn({ method: "POST" })
   });
 
 export const createReservation = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => bookingSchema.parse(input))
+  .validator((input: unknown) => bookingSchema.parse(input))
   .handler(async ({ data }): Promise<BookingConfirmation> => {
     const engine = await import("./reservation-engine.server");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -161,7 +161,7 @@ export const createReservation = createServerFn({ method: "POST" })
   });
 
 export const joinWaitlist = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => waitlistSchema.parse(input))
+  .validator((input: unknown) => waitlistSchema.parse(input))
   .handler(async ({ data }) => {
     const engine = await import("./reservation-engine.server");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -180,7 +180,7 @@ export const joinWaitlist = createServerFn({ method: "POST" })
   });
 
 export const lookupReservation = createServerFn({ method: "POST" })
-  .inputValidator((input: { bookingCode: string; phone: string }) => input)
+  .validator((input: { bookingCode: string; phone: string }) => input)
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { utcToLocalParts } = await import("./reservation-engine.server");
@@ -205,7 +205,7 @@ export const lookupReservation = createServerFn({ method: "POST" })
   });
 
 export const cancelReservationByCode = createServerFn({ method: "POST" })
-  .inputValidator((input: { bookingCode: string; phone: string }) => input)
+  .validator((input: { bookingCode: string; phone: string }) => input)
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const engine = await import("./reservation-engine.server");
