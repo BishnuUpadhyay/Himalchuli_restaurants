@@ -3,16 +3,7 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import {
-  getMyAccess,
-  getSettings,
-  inviteStaff,
-  listAuditLogs,
-  listStaff,
-  setStaffActive,
-  setStaffRole,
-  updateSettings,
-} from "@/lib/admin.functions";
+import { getSettings, listStaff, setStaffRole, updateSettings } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/_authenticated/admin/settings")({
   head: () => ({
@@ -37,18 +28,11 @@ function Settings() {
   const saveFn = useServerFn(updateSettings);
   const staffFn = useServerFn(listStaff);
   const roleFn = useServerFn(setStaffRole);
-  const inviteFn = useServerFn(inviteStaff);
-  const activeFn = useServerFn(setStaffActive);
-  const accessFn = useServerFn(getMyAccess);
 
   const settings = useQuery({ queryKey: ["settings"], queryFn: () => getFn() });
   const staff = useQuery({ queryKey: ["staff"], queryFn: () => staffFn(), retry: false });
-  // Same queryKey as admin/route.tsx's layout query, so this reuses the cached result.
-  const access = useQuery({ queryKey: ["my-access"], queryFn: () => accessFn() });
-  const isOwner = access.data?.role === "owner";
   const [draft, setDraft] = useState<Settings | null>(null);
-  const [invite, setInvite] = useState({ email: "", fullName: "", role: "staff" });
-  const [inviteBusy, setInviteBusy] = useState(false);
+  const [invite, setInvite] = useState({ email: "", role: "staff" });
 
   useEffect(() => {
     if (settings.data) setDraft(settings.data);
@@ -143,154 +127,50 @@ function Settings() {
 
       <section className="rounded-xl border border-border bg-card p-5">
         <h2 className="mb-4 font-display text-lg font-bold uppercase">Team</h2>
-        <p className="mb-4 text-xs text-muted-foreground">
-          Owner → Manager → Staff. Only owners can invite people, change roles, or disable accounts.
-          There's no public sign-up — every login is created here.
-        </p>
-        <ul className="mb-6 space-y-2 text-sm">
+        <ul className="mb-4 space-y-2 text-sm">
           {(staff.data ?? []).map((s) => (
-            <li key={s.userId} className="flex flex-wrap items-center justify-between gap-3 border-b border-border/60 pb-2">
-              <div>
-                <div>{s.name || s.email}</div>
-                <div className="text-xs text-muted-foreground">{s.email}</div>
-              </div>
-              <div className="flex items-center gap-2">
-                {!s.active && (
-                  <span className="rounded-full bg-destructive/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-destructive">
-                    Disabled
-                  </span>
-                )}
-                {isOwner ? (
-                  <select
-                    value={s.role}
-                    onChange={async (e) => {
-                      try {
-                        await roleFn({ data: { email: s.email ?? "", role: e.target.value } });
-                        toast.success("Role updated");
-                        qc.invalidateQueries();
-                      } catch (err) {
-                        toast.error((err as Error).message);
-                      }
-                    }}
-                    className="rounded-md border border-border bg-background px-2 py-1 text-xs uppercase tracking-wider"
-                  >
-                    <option value="staff">Staff</option>
-                    <option value="manager">Manager</option>
-                    <option value="owner">Owner</option>
-                  </select>
-                ) : (
-                  <span className="text-xs uppercase tracking-wider text-primary">{s.role}</span>
-                )}
-                {isOwner && (
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      try {
-                        await activeFn({ data: { userId: s.userId, active: !s.active } });
-                        toast.success(s.active ? "Staff account disabled" : "Staff account re-enabled");
-                        qc.invalidateQueries();
-                      } catch (err) {
-                        toast.error((err as Error).message);
-                      }
-                    }}
-                    className="rounded-md border border-border px-2 py-1 text-xs font-semibold uppercase tracking-wider hover:bg-background"
-                  >
-                    {s.active ? "Disable" : "Enable"}
-                  </button>
-                )}
-              </div>
+            <li key={s.userId} className="flex justify-between border-b border-border/60 pb-2">
+              <span>{s.email}</span>
+              <span className="uppercase text-xs tracking-wider text-primary">{s.role}</span>
             </li>
           ))}
-          {staff.data?.length === 0 && <li className="text-muted-foreground">No staff yet.</li>}
         </ul>
-
-        {isOwner && (
-          <form
-            className="flex flex-wrap gap-3"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              setInviteBusy(true);
-              try {
-                await inviteFn({ data: invite });
-                toast.success(`Invitation sent to ${invite.email}`);
-                setInvite({ email: "", fullName: "", role: "staff" });
-                qc.invalidateQueries();
-              } catch (err) {
-                toast.error((err as Error).message);
-              } finally {
-                setInviteBusy(false);
-              }
-            }}
+        <form
+          className="flex flex-wrap gap-3"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            try {
+              await roleFn({ data: invite });
+              toast.success("Role assigned");
+              qc.invalidateQueries();
+            } catch (err) {
+              toast.error((err as Error).message);
+            }
+          }}
+        >
+          <input
+            type="email"
+            required
+            placeholder="staff@email.com"
+            value={invite.email}
+            onChange={(e) => setInvite({ ...invite, email: e.target.value })}
+            className="rounded-md border border-border bg-background px-3 py-2 text-sm"
+          />
+          <select
+            value={invite.role}
+            onChange={(e) => setInvite({ ...invite, role: e.target.value })}
+            className="rounded-md border border-border bg-background px-3 py-2 text-sm"
           >
-            <input
-              type="text"
-              required
-              placeholder="Full name"
-              value={invite.fullName}
-              onChange={(e) => setInvite({ ...invite, fullName: e.target.value })}
-              className="rounded-md border border-border bg-background px-3 py-2 text-sm"
-            />
-            <input
-              type="email"
-              required
-              placeholder="staff@email.com"
-              value={invite.email}
-              onChange={(e) => setInvite({ ...invite, email: e.target.value })}
-              className="rounded-md border border-border bg-background px-3 py-2 text-sm"
-            />
-            <select
-              value={invite.role}
-              onChange={(e) => setInvite({ ...invite, role: e.target.value })}
-              className="rounded-md border border-border bg-background px-3 py-2 text-sm"
-            >
-              <option value="staff">Staff</option>
-              <option value="manager">Manager</option>
-              <option value="owner">Owner</option>
-            </select>
-            <button
-              disabled={inviteBusy}
-              className="rounded-md bg-primary px-4 py-2 text-sm font-semibold uppercase text-primary-foreground disabled:opacity-60"
-            >
-              {inviteBusy ? "Sending…" : "Send invite"}
-            </button>
-          </form>
-        )}
+            <option value="staff">Staff</option>
+            <option value="manager">Manager</option>
+            <option value="owner">Owner</option>
+          </select>
+          <button className="rounded-md bg-primary px-4 py-2 text-sm font-semibold uppercase text-primary-foreground">
+            Assign role
+          </button>
+        </form>
       </section>
-
-      <AuditLog visible={access.data?.role === "owner" || access.data?.role === "manager"} />
     </div>
-  );
-}
-
-function AuditLog({ visible }: { visible: boolean }) {
-  const logFn = useServerFn(listAuditLogs);
-  const logs = useQuery({ queryKey: ["audit-logs"], queryFn: () => logFn(), enabled: visible });
-
-  if (!visible) return null;
-
-  return (
-    <section className="rounded-xl border border-border bg-card p-5">
-      <h2 className="mb-4 font-display text-lg font-bold uppercase">Audit log</h2>
-      <p className="mb-4 text-xs text-muted-foreground">Recent staff and account changes.</p>
-      <ul className="max-h-80 space-y-2 overflow-y-auto text-sm">
-        {(logs.data ?? []).map((entry) => (
-          <li key={entry.id} className="border-b border-border/60 pb-2">
-            <div className="flex items-center justify-between gap-2">
-              <span className="font-medium">{entry.action}</span>
-              <span className="text-xs text-muted-foreground">
-                {new Date(entry.created_at).toLocaleString()}
-              </span>
-            </div>
-            {entry.details && Object.keys(entry.details as object).length > 0 && (
-              <div className="text-xs text-muted-foreground">
-                {JSON.stringify(entry.details)}
-              </div>
-            )}
-          </li>
-        ))}
-        {logs.data?.length === 0 && <li className="text-muted-foreground">No activity yet.</li>}
-      </ul>
-    </section>
   );
 }
 

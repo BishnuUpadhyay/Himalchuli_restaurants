@@ -19,42 +19,31 @@ export const Route = createFileRoute("/staff-login")({
   component: StaffLogin,
 });
 
-// NOTE: There is no public registration. Staff accounts only ever get created by
-// an owner via Settings → Team, which sends an email invite (see inviteStaff in
-// admin.functions.ts). This page only signs people in, or lets them request a
-// password reset email for an account that already exists.
 function StaffLogin() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"signin" | "forgot">("signin");
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
 
-  async function handleSignIn(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) throw error;
-      navigate({ to: "/admin" });
-    } catch (error) {
-      toast.error((error as Error).message);
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  async function handleForgotPassword(e: React.FormEvent) {
-    e.preventDefault();
-    setBusy(true);
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`,
-      });
-      if (error) throw error;
-      // Deliberately vague so this can't be used to enumerate staff emails.
-      toast.success("If that email has an account, a reset link is on its way.");
-      setMode("signin");
+      if (mode === "signin") {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        navigate({ to: "/admin" });
+      } else {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { emailRedirectTo: `${window.location.origin}/admin` },
+        });
+        if (error) throw error;
+        toast.success("Account created. Check your email to confirm, then sign in.");
+        setMode("signin");
+      }
     } catch (error) {
       toast.error((error as Error).message);
     } finally {
@@ -71,90 +60,46 @@ function StaffLogin() {
         </h1>
         <p className="mt-1 text-center text-xs uppercase tracking-[0.3em] text-primary">Staff access</p>
 
-        {mode === "signin" ? (
-          <>
-            <form onSubmit={handleSignIn} className="mt-8 space-y-4">
-              <label className="block text-sm">
-                <span className="mb-1 block font-semibold uppercase tracking-wider text-muted-foreground">
-                  Email
-                </span>
-                <input
-                  type="email"
-                  required
-                  autoComplete="username"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-md border border-border bg-background px-4 py-3"
-                />
-              </label>
-              <label className="block text-sm">
-                <span className="mb-1 block font-semibold uppercase tracking-wider text-muted-foreground">
-                  Password
-                </span>
-                <input
-                  type="password"
-                  required
-                  minLength={6}
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full rounded-md border border-border bg-background px-4 py-3"
-                />
-              </label>
-              <button
-                type="submit"
-                disabled={busy}
-                className="w-full rounded-md bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 disabled:opacity-60"
-              >
-                {busy ? "Please wait…" : "Sign in"}
-              </button>
-            </form>
+        <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+          <label className="block text-sm">
+            <span className="mb-1 block font-semibold uppercase tracking-wider text-muted-foreground">Email</span>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full rounded-md border border-border bg-background px-4 py-3"
+            />
+          </label>
+          <label className="block text-sm">
+            <span className="mb-1 block font-semibold uppercase tracking-wider text-muted-foreground">
+              Password
+            </span>
+            <input
+              type="password"
+              required
+              minLength={6}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-md border border-border bg-background px-4 py-3"
+            />
+          </label>
+          <button
+            type="submit"
+            disabled={busy}
+            className="w-full rounded-md bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 disabled:opacity-60"
+          >
+            {busy ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}
+          </button>
+        </form>
 
-            <button
-              type="button"
-              onClick={() => setMode("forgot")}
-              className="mt-4 w-full text-center text-xs uppercase tracking-wider text-muted-foreground hover:text-primary"
-            >
-              Forgot your password?
-            </button>
-          </>
-        ) : (
-          <>
-            <form onSubmit={handleForgotPassword} className="mt-8 space-y-4">
-              <p className="text-xs text-muted-foreground">
-                Enter the email your account was set up with and we'll send a link to reset your password.
-              </p>
-              <label className="block text-sm">
-                <span className="mb-1 block font-semibold uppercase tracking-wider text-muted-foreground">
-                  Email
-                </span>
-                <input
-                  type="email"
-                  required
-                  autoComplete="username"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-md border border-border bg-background px-4 py-3"
-                />
-              </label>
-              <button
-                type="submit"
-                disabled={busy}
-                className="w-full rounded-md bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 disabled:opacity-60"
-              >
-                {busy ? "Please wait…" : "Send reset link"}
-              </button>
-            </form>
-
-            <button
-              type="button"
-              onClick={() => setMode("signin")}
-              className="mt-4 w-full text-center text-xs uppercase tracking-wider text-muted-foreground hover:text-primary"
-            >
-              Back to sign in
-            </button>
-          </>
-        )}
+        <button
+          type="button"
+          onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
+          className="mt-4 w-full text-center text-xs uppercase tracking-wider text-muted-foreground hover:text-primary"
+        >
+          {mode === "signin" ? "Need an account? Sign up" : "Already have an account? Sign in"}
+        </button>
       </div>
     </div>
   );

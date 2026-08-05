@@ -1,24 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getRequest } from "@tanstack/react-start/server";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 const RESTAURANT = "11111111-1111-4111-8111-111111111111";
-
-// Best-effort absolute origin for building email redirect links (invite / reset password).
-// Falls back to an env var for background jobs where there's no inbound request.
-function siteOrigin(): string | undefined {
-  try {
-    const req = getRequest();
-    const origin = req?.headers.get("origin");
-    if (origin) return origin;
-    const referer = req?.headers.get("referer");
-    if (referer) return new URL(referer).origin;
-  } catch {
-    // no request context available
-  }
-  return process.env.SITE_URL;
-}
 
 /* ------------------------------------------------------------------ access */
 
@@ -43,14 +27,6 @@ export const getMyAccess = createServerFn({ method: "GET" })
           restaurant_id: RESTAURANT,
           email,
           full_name: email,
-        });
-        const { logAudit } = await import("./reservation-engine.server");
-        await logAudit({
-          actorId: context.userId,
-          action: "staff.bootstrap_owner",
-          entity: "staff_member",
-          entityId: context.userId,
-          details: { email },
         });
         role = "owner";
       }
@@ -622,7 +598,7 @@ export const getSettings = createServerFn({ method: "GET" })
     const { loadSettings } = await import("./reservation-engine.server");
     const s = await loadSettings();
     return {
-      openingHours: s.opening_hours,
+      openingHours: s.opening_hours as Record<string, { open: string; close: string; closed: boolean }>,
       defaultDurationMinutes: s.default_duration_minutes,
       bufferMinutes: s.buffer_minutes,
       slotIntervalMinutes: s.slot_interval_minutes,
@@ -742,66 +718,12 @@ export const listStaff = createServerFn({ method: "GET" })
     }));
   });
 
-// Owner creates a brand-new staff account and sends them a Supabase invite email.
-// There is no public sign-up route — this is the only way a new login gets created.
-export const inviteStaff = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
-    z
-      .object({
-        email: z.string().trim().toLowerCase().email().max(255),
-        fullName: z.string().trim().min(2).max(100),
-        role: z.enum(["owner", "manager", "staff"]),
-      })
-      .parse(input),
-  )
-  .handler(async ({ data, context }) => {
-    const { requireOwner } = await import("./admin.server");
-    await requireOwner(context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { logAudit } = await import("./reservation-engine.server");
-
-    const origin = siteOrigin();
-    const { data: invited, error } = await supabaseAdmin.auth.admin.inviteUserByEmail(data.email, {
-      data: { full_name: data.fullName },
-      redirectTo: origin ? `${origin}/reset-password` : undefined,
-    });
-    if (error) throw new Error(error.message);
-
-    const userId = invited.user.id;
-
-    const { error: staffErr } = await supabaseAdmin.from("staff_members").insert({
-      user_id: userId,
-      restaurant_id: RESTAURANT,
-      email: data.email,
-      full_name: data.fullName,
-      is_active: true,
-    });
-    if (staffErr) throw new Error(staffErr.message);
-
-    const { error: roleErr } = await supabaseAdmin
-      .from("user_roles")
-      .insert({ user_id: userId, role: data.role });
-    if (roleErr) throw new Error(roleErr.message);
-
-    await logAudit({
-      actorId: context.userId,
-      action: "staff.invited",
-      entity: "staff_member",
-      entityId: userId,
-      details: { email: data.email, fullName: data.fullName, role: data.role },
-    });
-
-    return { ok: true };
-  });
-
-// Owner changes the role of an existing staff account.
 export const setStaffRole = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) =>
     z
       .object({
-        email: z.string().trim().toLowerCase().email(),
+        email: z.string().trim().email(),
         role: z.enum(["owner", "manager", "staff"]),
       })
       .parse(input),
@@ -810,17 +732,11 @@ export const setStaffRole = createServerFn({ method: "POST" })
     const { requireOwner } = await import("./admin.server");
     await requireOwner(context.userId);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { logAudit } = await import("./reservation-engine.server");
-
-    const callerEmail = (context.claims.email as string | undefined)?.toLowerCase();
-    if (callerEmail && callerEmail === data.email) {
-      throw new Error("You can't change your own role — ask another owner to do it.");
-    }
 
     const { data: users, error: listErr } = await supabaseAdmin.auth.admin.listUsers({ perPage: 1000 });
     if (listErr) throw new Error(listErr.message);
     const user = users.users.find((u) => u.email?.toLowerCase() === data.email.toLowerCase());
-    if (!user) throw new Error("No account with that email — invite them first.");
+    if (!user) throw new Error("No account with that email yet — ask them to sign up first.");
 
     await supabaseAdmin.from("user_roles").delete().eq("user_id", user.id);
     const { error } = await supabaseAdmin
@@ -841,73 +757,7 @@ export const setStaffRole = createServerFn({ method: "POST" })
         full_name: user.email,
       });
     }
-
-    await logAudit({
-      actorId: context.userId,
-      action: "staff.role_changed",
-      entity: "staff_member",
-      entityId: user.id,
-      details: { email: data.email, role: data.role },
-    });
-
     return { ok: true };
-  });
-
-// Owner disables or re-enables a staff account. Disabling blocks the account both
-// at the RBAC layer (getRole returns null) and at the Supabase Auth layer (banned,
-// so even an unexpired session can't refresh and password sign-in is rejected).
-export const setStaffActive = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
-    z
-      .object({
-        userId: z.string().uuid(),
-        active: z.boolean(),
-      })
-      .parse(input),
-  )
-  .handler(async ({ data, context }) => {
-    const { requireOwner } = await import("./admin.server");
-    await requireOwner(context.userId);
-    if (data.userId === context.userId && !data.active) {
-      throw new Error("You can't disable your own account.");
-    }
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { logAudit } = await import("./reservation-engine.server");
-
-    const { error } = await supabaseAdmin
-      .from("staff_members")
-      .update({ is_active: data.active })
-      .eq("user_id", data.userId);
-    if (error) throw new Error(error.message);
-
-    const { error: authErr } = await supabaseAdmin.auth.admin.updateUserById(data.userId, {
-      ban_duration: data.active ? "none" : "876000h", // effectively indefinite
-    });
-    if (authErr) throw new Error(authErr.message);
-
-    await logAudit({
-      actorId: context.userId,
-      action: data.active ? "staff.enabled" : "staff.disabled",
-      entity: "staff_member",
-      entityId: data.userId,
-    });
-
-    return { ok: true };
-  });
-
-export const listAuditLogs = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    const { requireManager } = await import("./admin.server");
-    await requireManager(context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data } = await supabaseAdmin
-      .from("audit_logs")
-      .select("id, actor_id, actor_label, action, entity, entity_id, details, created_at")
-      .order("created_at", { ascending: false })
-      .limit(100);
-    return data ?? [];
   });
 
 export const listNotifications = createServerFn({ method: "GET" })

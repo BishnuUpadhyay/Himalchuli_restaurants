@@ -24,6 +24,7 @@ export type Database = {
           entity: string
           entity_id: string | null
           id: string
+          restaurant_id: string | null
         }
         Insert: {
           action: string
@@ -34,6 +35,7 @@ export type Database = {
           entity: string
           entity_id?: string | null
           id?: string
+          restaurant_id?: string | null
         }
         Update: {
           action?: string
@@ -44,8 +46,17 @@ export type Database = {
           entity?: string
           entity_id?: string | null
           id?: string
+          restaurant_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "audit_logs_restaurant_id_fkey"
+            columns: ["restaurant_id"]
+            isOneToOne: false
+            referencedRelation: "restaurants"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       customers: {
         Row: {
@@ -630,15 +641,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      can_manage: { Args: { _user_id: string }; Returns: boolean }
-      has_role: {
-        Args: {
-          _role: Database["public"]["Enums"]["app_role"]
-          _user_id: string
-        }
-        Returns: boolean
-      }
-      is_staff: { Args: { _user_id: string }; Returns: boolean }
+      [_ in never]: never
     }
     Enums: {
       app_role: "owner" | "manager" | "staff"

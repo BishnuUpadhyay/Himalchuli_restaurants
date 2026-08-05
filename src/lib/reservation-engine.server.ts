@@ -317,6 +317,7 @@ export async function logAudit(input: {
     action: input.action,
     entity: input.entity,
     entity_id: input.entityId ?? null,
+    restaurant_id: RESTAURANT_ID,
     details: (input.details ?? {}) as never,
   });
 }

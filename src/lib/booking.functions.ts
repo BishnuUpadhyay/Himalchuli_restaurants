@@ -123,13 +123,13 @@ export const createReservation = createServerFn({ method: "POST" })
       subject: `Your reservation at Himalchuli — ${bookingCode}`,
       body: summary,
     });
-    // await engine.queueNotification({
-    //   reservationId: reservation.id,
-    //   channel: "sms",
-    //   type: "booking_confirmation",
-    //   recipient: data.phone,
-    //   body: summary,
-    // });
+    await engine.queueNotification({
+      reservationId: reservation.id,
+      channel: "sms",
+      type: "booking_confirmation",
+      recipient: data.phone,
+      body: summary,
+    });
     await engine.queueNotification({
       reservationId: reservation.id,
       channel: "email",
