@@ -5,6 +5,7 @@ import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { nitro } from "nitro/vite";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -29,5 +30,9 @@ export default defineConfig({
       server: { entry: "server" },
     }),
     viteReact(),
+    // Without this, Vite just produces a generic SSR bundle (dist/server/*) that Vercel
+    // doesn't know how to invoke, which is what was causing the 404: NOT_FOUND on every
+    // request. This tells Nitro to build a Vercel-compatible serverless function output.
+    nitro({ preset: "vercel" }),
   ],
 });

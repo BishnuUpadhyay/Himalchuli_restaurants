@@ -139,6 +139,16 @@ export const createReservation = createServerFn({ method: "POST" })
       body: summary,
       scheduledFor: new Date(start.getTime() - 24 * 60 * 60 * 1000),
     });
+    await engine.queueNotification({
+      reservationId: reservation.id,
+      channel: "email",
+      type: "admin_new_booking",
+      recipient: engine.ADMIN_NOTIFICATION_EMAIL,
+      subject: `New reservation — ${bookingCode} (${data.guestCount} guests)`,
+      body: `${summary}\nGuest: ${data.fullName}\nPhone: ${data.phone}\nEmail: ${data.email}${
+        data.specialRequest ? `\nNote: ${data.specialRequest}` : ""
+      }`,
+    });
 
     await engine.logAudit({
       action: "reservation.created",
@@ -231,6 +241,14 @@ export const cancelReservationByCode = createServerFn({ method: "POST" })
         body: `Your reservation ${row.booking_code} has been cancelled.`,
       });
     }
+    await engine.queueNotification({
+      reservationId: row.id,
+      channel: "email",
+      type: "admin_cancellation",
+      recipient: engine.ADMIN_NOTIFICATION_EMAIL,
+      subject: `Reservation ${row.booking_code} cancelled by guest`,
+      body: `The guest cancelled reservation ${row.booking_code}.`,
+    });
     await engine.logAudit({
       action: "reservation.cancelled",
       entity: "reservation",

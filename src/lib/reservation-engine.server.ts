@@ -5,6 +5,9 @@ import type { TableLocation, TimeSlot } from "./reservations.shared";
 
 export const RESTAURANT_ID = "11111111-1111-4111-8111-111111111111";
 
+// Where staff-facing "new reservation" / "cancellation" alerts are sent.
+export const ADMIN_NOTIFICATION_EMAIL = "drbrbd1@gmail.com";
+
 const BLOCKING_STATUSES = ["pending", "confirmed", "seated"] as const;
 
 /** Convert a restaurant-local date + time (YYYY-MM-DD, HH:mm) into a UTC Date. */
