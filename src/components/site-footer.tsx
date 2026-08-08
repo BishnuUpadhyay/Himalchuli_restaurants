@@ -27,7 +27,7 @@ export function SiteFooter() {
           <h4 className="font-display text-lg font-semibold uppercase tracking-wider text-white">Contact</h4>
           <ul className="mt-4 space-y-3 text-sm">
             <li className="flex gap-2"><MapPin className="h-4 w-4 shrink-0 text-primary" /> 36 Plaistow Rd, Haverhill, MA 01830</li>
-            <li className="flex gap-2"><Phone className="h-4 w-4 shrink-0 text-primary" /> (224) 900-0144</li>
+            <li className="flex gap-2"><Phone className="h-4 w-4 shrink-0 text-primary" /> (978) 241-4259</li>
             <li className="flex gap-2"><Mail className="h-4 w-4 shrink-0 text-primary" /> himalchuli2026@gmail.com</li>
           </ul>
         </div>
