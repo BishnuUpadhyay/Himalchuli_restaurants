@@ -106,35 +106,66 @@ function Index() {
       </section>
 
       {/* Menu highlights */}
-      <section className="bg-secondary/40 py-24">
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <div className="text-center">
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">Food Menu</p>
-            <h2 className="mt-3 font-display text-4xl font-bold uppercase tracking-wide md:text-5xl">Most Popular Items</h2>
-          </div>
-          <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {popular.map((d) => (
-              <article key={d.name} className="group overflow-hidden rounded-xl bg-card shadow-md transition hover:shadow-2xl">
-                <div className="overflow-hidden">
-                  <img src={d.img} alt={d.name} width={800} height={600} loading="lazy" className="h-56 w-full object-cover transition duration-500 group-hover:scale-105" />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="font-display text-xl font-semibold uppercase tracking-wide">{d.name}</h3>
-                    <span className="font-display text-lg font-bold text-primary">{d.price}</span>
-                  </div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d.desc}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <Link to="/menu" className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-primary-foreground transition hover:bg-primary/90">
-              View Full Menu
-            </Link>
-          </div>
+    <section className="bg-secondary/40 py-24">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <div className="text-center">
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">
+            Food Menu
+          </p>
+          <h2 className="mt-3 font-display text-4xl font-bold uppercase tracking-wide md:text-5xl">
+            Most Popular Items
+          </h2>
         </div>
-      </section>
+
+        {/* Menu Items Grid with Dotted Leader Lines */}
+        <div className="mt-14 grid gap-x-12 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
+          {popular.map((d) => (
+            <div key={d.name} className="flex flex-col justify-between rounded-xl border border-border bg-card p-5 shadow-sm">
+              <div>
+                <div className="flex w-full items-baseline">
+                  {/* Item Name */}
+                  <h3 className="shrink-0 font-display text-lg font-semibold uppercase tracking-wide text-foreground">
+                    {d.name}
+                  </h3>
+
+                  {/* Dotted Leader Line */}
+                  <div className="relative top-[-4px] mx-2 flex-grow border-b-2 border-dotted border-border" />
+
+                  {/* Price */}
+                  <div className="shrink-0 font-display text-lg font-bold text-primary">
+                    {d.price}
+                  </div>
+                </div>
+
+                {/* Optional Tag */}
+                {d.tag && (
+                  <span className="mt-1 inline-block rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                    {d.tag}
+                  </span>
+                )}
+
+                {/* Description */}
+                {d.desc && (
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {d.desc}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Call To Action Button */}
+        <div className="mt-12 text-center">
+          <Link
+            to="/menu"
+            className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-primary-foreground transition hover:bg-primary/90"
+          >
+            View Full Menu
+          </Link>
+        </div>
+      </div>
+    </section>
 
       {/* Reservation CTA */}
       <section className="relative isolate overflow-hidden bg-surface py-24">
