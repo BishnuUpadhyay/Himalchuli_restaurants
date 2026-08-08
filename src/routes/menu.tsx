@@ -30,7 +30,7 @@ const menu: Record<string, Item[]> = {
     { name: "Samosa Chat", price: "$11.99", desc: "", img: dishdefault },
     { name: "Gobi Manchurian", price: "$11.99", desc: "", img: dishdefault },
     { name: "Chicken 65", price: "$13.99", desc: "", img: dishdefault },
-    { name: "Chicken Chilli", price: "$13.99", desc: "", img: dishdefault }
+    // { name: "Chicken Chilli", price: "$13.99", desc: "", img: dishdefault }
   ],
 
   Nepalese_Cuisine: [
@@ -149,9 +149,9 @@ const categories = Object.keys(menu);
 function MenuPage() {
   const [active, setActive] = useState(categories[0]);
   const items = menu[active];
-const formatLabel = (str: any) =>
+  const formatLabel = (str: any) =>
     str.toLowerCase().replace(/_/g, " ")
-      .replace(/\b\w/g, (char : any) => char.toUpperCase());
+      .replace(/\b\w/g, (char: any) => char.toUpperCase());
   return (
     <>
       <section className="bg-surface py-20 text-center">

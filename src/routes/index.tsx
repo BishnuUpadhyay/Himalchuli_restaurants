@@ -23,7 +23,7 @@ const features = [
 ];
 
 const popular = [
-  { name: "Chicken Chilli", price: "$16.99", desc: "Crispy chicken cooked with onion, colored bell pepper, garlic, herbs and spices", img: dishdefault },
+  // { name: "Chicken Chilli", price: "$16.99", desc: "Crispy chicken cooked with onion, colored bell pepper, garlic, herbs and spices", img: dishdefault },
   { name: "Tandoori Shrimp", price: "$19.99", desc: "Shrimp marinated in herbs, spices, mustard oil and sour cream; serve with grilled onion and bell peppers", img: dishdefault },
   { name: "Mustang Aaloo", price: "$8.99", desc: "Boiled potatoes tossed with butter, oil and Nepalese herbs and spices", tag: "GF, Veg", img: dishdefault },
   { name: "Chicken Chaumin", price: "$15.99", desc: "Tender chicken and noodles cooked with herbs and spices", img: dishdefault },
@@ -93,14 +93,14 @@ function Index() {
             From meticulously hand-folded momos to the deep, smoky notes of our clay tandoor, every dish is crafted with purpose — hand-ground spices, fresh produce and heritage techniques for a perfect balance of comfort and flavor.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-6">
-            <div>
+            {/* <div>
               <div className="font-display text-5xl font-bold text-primary">15+</div>
               <div className="mt-1 text-sm uppercase tracking-wider text-muted-foreground">Years of Experience</div>
             </div>
             <div>
               <div className="font-display text-5xl font-bold text-primary">50+</div>
               <div className="mt-1 text-sm uppercase tracking-wider text-muted-foreground">Signature Dishes</div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -150,7 +150,7 @@ function Index() {
       </section>
 
       {/* Testimonials */}
-      <section className="mx-auto max-w-7xl px-4 py-24 md:px-8">
+      {/* <section className="mx-auto max-w-7xl px-4 py-24 md:px-8">
         <div className="text-center">
           <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">Testimonials</p>
           <h2 className="mt-3 font-display text-4xl font-bold uppercase tracking-wide md:text-5xl">Our Guests Say</h2>
@@ -169,7 +169,7 @@ function Index() {
             </figure>
           ))}
         </div>
-      </section>
+      </section> */}
     </>
   );
 }

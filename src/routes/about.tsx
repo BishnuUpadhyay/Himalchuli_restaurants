@@ -44,7 +44,7 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-secondary/40 py-24">
+      {/* <section className="bg-secondary/40 py-24">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 md:grid-cols-3 md:px-8">
           {[
             { n: "15+", l: "Years of Experience" },
@@ -57,7 +57,7 @@ function AboutPage() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
     </>
   );
 }
