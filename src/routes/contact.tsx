@@ -16,6 +16,15 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const schedule = [
+  { day: "Sunday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+  { day: "Monday", hours: ["Closed"] },
+  { day: "Tuesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  { day: "Wednesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  { day: "Thursday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  { day: "Friday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  { day: "Saturday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+];
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   return (
     <>
@@ -26,9 +35,9 @@ function ContactPage() {
 
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-20 md:grid-cols-3 md:px-8">
         {[
-          { icon: MapPin, title: "Address", body: "123 Mountain View Ave\nWashington, DC 20001" },
-          { icon: Phone, title: "Call Us", body: "(202) 555-0142\n(202) 555-0143" },
-          { icon: Mail, title: "Email", body: "hello@himalchuli-dc.com\nbookings@himalchuli-dc.com" },
+          { icon: MapPin, title: "Address", body: "36 Plaistow Rd, Haverhill, 01830" },
+          { icon: Phone, title: "Call Us", body: "9782414259" },
+          { icon: Mail, title: "Email", body: "himalchuli2026@gmail.com" },
         ].map((c) => (
           <div key={c.title} className="rounded-xl border border-border bg-card p-8 text-center shadow-sm">
             <c.icon className="mx-auto h-10 w-10 text-primary" />
@@ -39,21 +48,32 @@ function ContactPage() {
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-10 px-4 pb-24 md:grid-cols-2 md:px-8">
-        <div>
-          <h2 className="font-display text-3xl font-bold uppercase tracking-wide">Opening Hours</h2>
-          <ul className="mt-6 space-y-3 text-sm">
-            {[
-              ["Monday – Thursday", "11:30 – 22:00"],
-              ["Friday – Saturday", "11:30 – 23:30"],
-              ["Sunday", "12:00 – 21:30"],
-            ].map(([d, h]) => (
-              <li key={d} className="flex items-center justify-between border-b border-border pb-3">
-                <span className="flex items-center gap-2 font-semibold"><Clock className="h-4 w-4 text-primary" />{d}</span>
-                <span className="text-muted-foreground">{h}</span>
-              </li>
-            ))}
-          </ul>
+       <div>
+  <h2 className="font-display text-3xl font-bold uppercase tracking-wide">Opening Hours</h2>
+  <ul className="mt-6 space-y-3 text-sm">
+    {[
+      { day: "Sunday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+      { day: "Monday", hours: ["Closed"] },
+      { day: "Tuesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+      { day: "Wednesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+      { day: "Thursday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+      { day: "Friday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+      { day: "Saturday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+    ].map((item) => (
+      <li key={item.day} className="flex items-start justify-between border-b border-border pb-3">
+        <span className="flex items-center gap-2 font-semibold">
+          <Clock className="h-4 w-4 text-primary" />
+          {item.day}
+        </span>
+        <div className="text-right text-muted-foreground">
+          {item.hours.map((time, idx) => (
+            <div key={idx}>{time}</div>
+          ))}
         </div>
+      </li>
+    ))}
+  </ul>
+</div>
 
         <form
           onSubmit={(e) => {

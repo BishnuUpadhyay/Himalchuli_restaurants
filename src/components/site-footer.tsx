@@ -2,6 +2,15 @@ import { Link } from "@tanstack/react-router";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export function SiteFooter() {
+  const schedule = [
+  { day: "Sunday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+  { day: "Monday", hours: ["Closed"] },
+  { day: "Tuesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  { day: "Wednesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  { day: "Thursday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  { day: "Friday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  { day: "Saturday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+];
   return (
     <footer className="bg-surface text-white/80">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 md:grid-cols-4 md:px-8">
@@ -24,13 +33,22 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h4 className="font-display text-lg font-semibold uppercase tracking-wider text-white">Opening Hours</h4>
-          <ul className="mt-4 space-y-3 text-sm">
-            <li className="flex gap-2"><Clock className="h-4 w-4 shrink-0 text-primary" /> Mon – Thu: 11:30 – 22:00</li>
-            <li className="flex gap-2"><Clock className="h-4 w-4 shrink-0 text-primary" /> Fri – Sat: 11:30 – 23:30</li>
-            <li className="flex gap-2"><Clock className="h-4 w-4 shrink-0 text-primary" /> Sunday: 12:00 – 21:30</li>
-          </ul>
-        </div>
+    <h4 className="font-display text-lg font-semibold uppercase tracking-wider text-white">Opening Hours</h4>
+    <ul className="mt-4 space-y-3 text-sm">
+      {schedule.map((item) => (
+        <li key={item.day} className="flex justify-between items-start gap-4">
+          <span className="flex items-center gap-2">
+            <Clock className="h-4 w-4 shrink-0 text-primary" /> {item.day}
+          </span>
+          <div className="text-right">
+            {item.hours.map((time, idx) => (
+              <div key={idx}>{time}</div>
+            ))}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
 
         <div>
           <h4 className="font-display text-lg font-semibold uppercase tracking-wider text-white">Quick Links</h4>
