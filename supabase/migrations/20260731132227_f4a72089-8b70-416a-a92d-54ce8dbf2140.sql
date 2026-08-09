@@ -65,8 +65,15 @@ $$;
 CREATE TABLE public.restaurant_settings (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   restaurant_id uuid NOT NULL UNIQUE REFERENCES public.restaurants(id) ON DELETE CASCADE,
-  opening_hours jsonb NOT NULL DEFAULT '{"0":{"open":"11:30","close":"22:00","closed":false},"1":{"open":"11:30","close":"22:00","closed":false},"2":{"open":"11:30","close":"22:00","closed":false},"3":{"open":"11:30","close":"22:00","closed":false},"4":{"open":"11:30","close":"22:00","closed":false},"5":{"open":"11:30","close":"23:00","closed":false},"6":{"open":"11:30","close":"23:00","closed":false}}'::jsonb,
-  default_duration_minutes int NOT NULL DEFAULT 120,
+  opening_hours jsonb NOT NULL DEFAULT '{
+  "0": { "closed": false, "windows": [{ "open": "11:00", "close": "14:30" }, { "open": "16:30", "close": "22:30" }] },
+  "1": { "closed": true,  "windows": [] },
+  "2": { "closed": false, "windows": [{ "open": "11:00", "close": "14:30" }, { "open": "16:30", "close": "22:00" }] },
+  "3": { "closed": false, "windows": [{ "open": "11:00", "close": "14:30" }, { "open": "16:30", "close": "22:00" }] },
+  "4": { "closed": false, "windows": [{ "open": "11:00", "close": "14:30" }, { "open": "16:30", "close": "22:00" }] },
+  "5": { "closed": false, "windows": [{ "open": "11:00", "close": "14:30" }, { "open": "16:30", "close": "22:00" }] },
+  "6": { "closed": false, "windows": [{ "open": "11:00", "close": "14:30" }, { "open": "16:30", "close": "22:30" }] }
+}'  default_duration_minutes int NOT NULL DEFAULT 120,
   buffer_minutes int NOT NULL DEFAULT 15,
   slot_interval_minutes int NOT NULL DEFAULT 30,
   max_covers_per_slot int NOT NULL DEFAULT 40,
