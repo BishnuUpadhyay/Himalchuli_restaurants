@@ -47,7 +47,7 @@ function Index() {
           alt="Steaming Nepali momos on a wooden board"
           width={1600}
           height={900}
-          className="absolute inset-0 h-full w-full object-cover opacity-60"
+          className="absolute inset-0 h-full w-full object-cover opacity-60 "
         />
         <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/70 to-surface/20" />
         <div className="relative mx-auto flex min-h-[80vh] max-w-7xl flex-col justify-center px-4 py-24 md:px-8">
@@ -105,67 +105,6 @@ function Index() {
         </div>
       </section>
 
-      {/* Menu highlights */}
-    <section className="bg-secondary/40 py-24">
-      <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <div className="text-center">
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">
-            Food Menu
-          </p>
-          <h2 className="mt-3 font-display text-4xl font-bold uppercase tracking-wide md:text-5xl">
-            Most Popular Items
-          </h2>
-        </div>
-
-        {/* Menu Items Grid with Dotted Leader Lines */}
-        <div className="mt-14 grid gap-x-12 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
-          {popular.map((d) => (
-            <div key={d.name} className="flex flex-col justify-between rounded-xl border border-border bg-card p-5 shadow-sm">
-              <div>
-                <div className="flex w-full items-baseline">
-                  {/* Item Name */}
-                  <h3 className="shrink-0 font-display text-lg font-semibold uppercase tracking-wide text-foreground">
-                    {d.name}
-                  </h3>
-
-                  {/* Dotted Leader Line */}
-                  <div className="relative top-[-4px] mx-2 flex-grow border-b-2 border-dotted border-border" />
-
-                  {/* Price */}
-                  <div className="shrink-0 font-display text-lg font-bold text-primary">
-                    {d.price}
-                  </div>
-                </div>
-
-                {/* Optional Tag */}
-                {d.tag && (
-                  <span className="mt-1 inline-block rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
-                    {d.tag}
-                  </span>
-                )}
-
-                {/* Description */}
-                {d.desc && (
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {d.desc}
-                  </p>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Call To Action Button */}
-        <div className="mt-12 text-center">
-          <Link
-            to="/menu"
-            className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-primary-foreground transition hover:bg-primary/90"
-          >
-            View Full Menu
-          </Link>
-        </div>
-      </div>
-    </section>
 
       {/* Reservation CTA */}
       <section className="relative isolate overflow-hidden bg-surface py-24">
@@ -179,6 +118,70 @@ function Index() {
           </Link>
         </div>
       </section>
+
+      {/* Menu highlights */}
+      <section className="bg-secondary/40 py-24">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
+          <div className="text-center">
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">
+              Food Menu
+            </p>
+            <h2 className="mt-3 font-display text-4xl font-bold uppercase tracking-wide md:text-5xl">
+              Most Popular Items
+            </h2>
+          </div>
+
+          {/* Menu Items Grid with Dotted Leader Lines */}
+          <div className="mt-14 grid gap-x-12 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
+            {popular.map((d) => (
+              <div key={d.name} className="flex flex-col justify-between rounded-xl border border-border bg-card p-5 shadow-sm">
+                <div>
+                  <div className="flex w-full items-baseline">
+                    {/* Item Name */}
+                    <h3 className="shrink-0 font-display text-lg font-semibold uppercase tracking-wide text-foreground">
+                      {d.name}
+                    </h3>
+
+                    {/* Dotted Leader Line */}
+                    <div className="relative top-[-4px] mx-2 flex-grow border-b-2 border-dotted border-border" />
+
+                    {/* Price */}
+                    <div className="shrink-0 font-display text-lg font-bold text-primary">
+                      {d.price}
+                    </div>
+                  </div>
+
+                  {/* Optional Tag */}
+                  {d.tag && (
+                    <span className="mt-1 inline-block rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                      {d.tag}
+                    </span>
+                  )}
+
+                  {/* Description */}
+                  {d.desc && (
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {d.desc}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Call To Action Button */}
+          <div className="mt-12 text-center">
+            <Link
+              to="/menu"
+              className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-primary-foreground transition hover:bg-primary/90"
+            >
+              View Full Menu
+            </Link>
+          </div>
+        </div>
+      </section>
+
+
 
       {/* Testimonials */}
       {/* <section className="mx-auto max-w-7xl px-4 py-24 md:px-8">
