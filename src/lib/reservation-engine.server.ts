@@ -55,8 +55,11 @@ export type RestaurantTable = {
   is_active: boolean;
 };
 
+export type OpeningWindow = { open: string; close: string };
+export type DayHours = { closed: boolean; windows: OpeningWindow[] };
+
 export type Settings = {
-  opening_hours: Record<string, { open: string; close: string; closed: boolean }>;
+  opening_hours: Record<string, DayHours>; // "0" = Sunday ... "6" = Saturday
   default_duration_minutes: number;
   buffer_minutes: number;
   slot_interval_minutes: number;
@@ -211,59 +214,63 @@ export async function buildAvailability(
   const settings = await loadSettings();
   const weekday = new Date(`${date}T12:00:00Z`).getUTCDay();
   const hours = settings.opening_hours[String(weekday)];
-  if (!hours || hours.closed) return { slots: [], closed: true, note: "Closed on this day" };
+  if (!hours || hours.closed || hours.windows.length === 0) {
+    return { slots: [], closed: true, note: "Closed on this day" };
+  }
 
   const [tables, reservations] = await Promise.all([loadTables(), loadDayReservations(date)]);
   const links = await loadReservationTableLinks(reservations.map((r) => r.id));
 
-  const [openH, openM] = hours.open.split(":").map(Number);
-  const [closeH, closeM] = hours.close.split(":").map(Number);
-  const openMin = openH * 60 + openM;
-  const closeMin = closeH * 60 + closeM;
-  const lastSeating = closeMin - 60; // last booking one hour before close
   const step = settings.slot_interval_minutes;
   const now = Date.now();
-
   const slots: TimeSlot[] = [];
-  for (let m = openMin; m <= lastSeating; m += step) {
-    const time = `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
-    const start = localToUtc(date, time);
-    if (start.getTime() < now + 30 * 60000) continue; // no same-minute bookings
 
-    const busy = busyTableIds(
-      reservations,
-      start,
-      settings.default_duration_minutes,
-      settings.buffer_minutes,
-      links,
-    );
+  for (const window of hours.windows) {
+    const [openH, openM] = window.open.split(":").map(Number);
+    const [closeH, closeM] = window.close.split(":").map(Number);
+    const openMin = openH * 60 + openM;
+    const closeMin = closeH * 60 + closeM;
+    const lastSeating = closeMin - 60; // last booking one hour before that window's close
 
-    // covers control
-    const windowEnd = start.getTime() + settings.default_duration_minutes * 60000;
-    const covers = reservations
-      .filter((r) => {
-        const rs = new Date(r.reserved_at).getTime();
-        return rs >= start.getTime() && rs < windowEnd;
-      })
-      .reduce((sum, r) => sum + r.guest_count, 0);
+    for (let m = openMin; m <= lastSeating; m += step) {
+      const time = `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+      const start = localToUtc(date, time);
+      if (start.getTime() < now + 30 * 60000) continue; // no same-minute bookings
 
-    const free = tables.filter(
-      (t) =>
-        t.is_active &&
-        t.status !== "unavailable" &&
-        !busy.has(t.id) &&
-        t.maximum_guests >= guests &&
-        t.minimum_guests <= guests,
-    );
-    const combo = free.length === 0 ? pickBestTable(tables, busy, guests, preferredLocation) : null;
-    const capacityOk = free.length > 0 || !!combo;
+      const busy = busyTableIds(
+        reservations,
+        start,
+        settings.default_duration_minutes,
+        settings.buffer_minutes,
+        links,
+      );
 
-    slots.push({
-      time,
-      label: formatLabel(time),
-      available: capacityOk && covers + guests <= settings.max_covers_per_slot,
-      tablesLeft: free.length,
-    });
+      const windowEnd = start.getTime() + settings.default_duration_minutes * 60000;
+      const covers = reservations
+        .filter((r) => {
+          const rs = new Date(r.reserved_at).getTime();
+          return rs >= start.getTime() && rs < windowEnd;
+        })
+        .reduce((sum, r) => sum + r.guest_count, 0);
+
+      const free = tables.filter(
+        (t) =>
+          t.is_active &&
+          t.status !== "unavailable" &&
+          !busy.has(t.id) &&
+          t.maximum_guests >= guests &&
+          t.minimum_guests <= guests,
+      );
+      const combo = free.length === 0 ? pickBestTable(tables, busy, guests, preferredLocation) : null;
+      const capacityOk = free.length > 0 || !!combo;
+
+      slots.push({
+        time,
+        label: formatLabel(time),
+        available: capacityOk && covers + guests <= settings.max_covers_per_slot,
+        tablesLeft: free.length,
+      });
+    }
   }
 
   return { slots, closed: false };
