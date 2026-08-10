@@ -13,115 +13,119 @@ export const Route = createFileRoute("/menu")({
   component: MenuPage,
 });
 
-type Item = { name: string; price: string; desc: string; tag?: string };
+// type Item = { name: string; price: string; desc: string; tag?: string };
+
+export interface Item {
+  name: string;
+  price: string;
+  desc: string;
+  tag?: string;
+}
 
 const menu: Record<string, Item[]> = {
   Appetizers: [
-    { name: "Lentil Soup", price: "$5.99", desc: "" },
-    { name: "Vegetable Samosa", price: "$5.99", desc: "" },
-    { name: "Mixed Veg Pakoda", price: "$7.99", desc: "" },
-    { name: "Samosa Chat", price: "$11.99", desc: "" },
-    { name: "Gobi Manchurian", price: "$11.99", desc: "" },
-    { name: "Chicken 65", price: "$13.99", desc: "" },
+    { name: "Mountain Pear Salad", price: "From $13.99", desc: "A refreshing medley of mixed greens, cherry tomatoes, grated carrot, pomegranate seeds, and Asian pear, finished with a light, zesty Nepali-style dressing. Add protein: Veg (+$0) / Chicken (+$2) / Shrimp (+$4) / Salmon (+$6).",tag: ""},    { name: "Lentil Soup", price: "$6.99", desc: "Mixed red and peeled black lentil cooked in Indian herbs & spices. (Veg, VN, G.F)" },
+    { name: "Vegetable Samosa", price: "$6.99", desc: "Triangular Indian pastries stuffed with potatoes, green peas, mild herbs & spices. (Veg, VN)" },
+    { name: "Mixed Veg. Pakoda", price: "$8.99", desc: "Crispy, deep-fried Indian fritters, shredded vegetables dipped in a chickpea flour batter. (Veg, VN, G.F)" },
+    { name: "Crispy Palak Chaat", price: "$12.99", desc: "Deep-fried flash-crisped spinach served with tangy tamarind chutney, cool raita, and fresh mint sauce. (VN, Veg, G.F)" },
+    { name: "Samosa Chaat", price: "$12.99", desc: "Crispy potato samosas crushed over warm chickpea curry, layered with yogurt, tamarind and mint chutneys, and topped with sev, onions, and cilantro." },
+    { name: "Gobi Manchurian", price: "$12.99", desc: "Crispy cauliflower tossed in a spicy sweet and tangy sauce with soy sauce, vinegar and chilli sauce. (Veg, VN)" },
+    { name: "Chicken 65", price: "$14.99", desc: "Crispy chicken with mustard seeds, whole chilli peppers, fresh garlic, ginger, curry leaf, chopped onion and cilantro." },
+    { name: "Chicken Chilli", price: "$14.99", desc: "Crispy Chicken cooked with onion, colored bell pepper, garlic, herbs and spices." }
   ],
-  Nepalese_Cuisine: [
-    { name: "Veg Chowmein", price: "$13.99", desc: "" },
-    { name: "Chicken Chowmein", price: "$15.99", desc: "" },
-    { name: "Shrimp Chowmein", price: "$16.99", desc: "" },
-    { name: "Chicken Sekuwa", price: "$15.99", desc: "" },
-    { name: "Chicken Choila", price: "$15.99", desc: "" },
-    { name: "Steamed Veg Momo", price: "$15.99", desc: "Preparation: Steamed" },
-    { name: "Fried Veg Momo", price: "$16.99", desc: "Preparation: Fried" },
-    { name: "Chilli Veg Momo", price: "$17.99", desc: "Preparation: Chilli" },
-    { name: "Steamed Chicken Momo", price: "$15.99", desc: "Preparation: Steamed" },
-    { name: "Fried Chicken Momo", price: "$17.99", desc: "Preparation: Fried" },
-    { name: "Chilli Chicken Momo", price: "$18.99", desc: "Preparation: Chilli" },
-    { name: "Mustang Aloo", price: "$11.99", desc: "" }
+  "Nepalese Cuisine": [
+    { name: "Chowmein", price: "$16.99", desc: "Shredded fresh vegetables and noodles cooked with herbs and spices. (Veg $16.99 / Chicken $17.99 / Shrimp $19.99 / Lamb $20.99)" },
+    { name: "Chicken Sekuwa", price: "$12.99", desc: "Marinated chicken skewered and grilled in tandoor oven. (G.F)" },
+    { name: "Chicken Choila", price: "$12.99", desc: "Grilled chicken Oil tempered with mustard oil, fenugreek seeds, green chilli, spring onion and spices, mixed with spring onion, Szechuan pepper, sliced ginger, garlic and cilantro. (G.F)" },
+    { name: "Mustang Aloo", price: "$12.99", desc: "Boiled potatoes tossed with butter oil and Nepalese herbs and spices. (Veg, G.F)" },
+    { name: "Goat Curry", price: "$20.99", desc: "Tender goat meat slow-cooked in a rich, aromatic gravy of caramelized onions, garlic, ginger, and traditional whole spices." },
+    { name: "Veg. Momo", price: "From $16.99", desc: "Chopped fresh vegetable stuffed dumplings seasoned with Nepalese herbs and spices. Style options: Steamed (+$0) / Fried (+$1) / Chilli (+$2).",tag: "Veg"},  
+    { name: "Chicken Momo", price: "$17.99", desc: "Chicken stuffed steamed dumplings seasoned with Nepalese herbs and spices. (Steamed $17.99 / Fried $18.99 / Chilli $19.99)" }
   ],
-  Tandoori_Entrees: [
-    { name: "Tandoori Chicken", price: "$18.99", desc: "" },
-    { name: "Chicken Tikka", price: "$18.99", desc: "" },
-    { name: "Tandoori Salmon", price: "$24.99", desc: "" },
-    { name: "Lamb Chop", price: "$24.99", desc: "" },
-    { name: "Tandoori Shrimp", price: "$20.99", desc: "" },
-    { name: "Paneer Tikka Tandoor", price: "$21.99", desc: "" }
+  "Tandoori Entrees": [
+    { name: "Tandoori Chicken", price: "$20.99", desc: "Half chicken marinated in herbs, spices, mustard oil, and yogurt. Served with grilled onion and bell peppers on a sizzling hot plate. (G.F)" },
+    { name: "Chicken Tikka", price: "$20.99", desc: "Tender boneless chicken marinated with aromatic herbs, flavorful spices, mustard oil, and sour cream, then served with grilled onions and bell peppers on a sizzling hot plate. (G.F)" },
+    { name: "Tandoori Salmon", price: "$25.99", desc: "Fresh salmon marinated in aromatic herbs, spices, mustard oil, and sour cream, served with grilled onions and bell peppers on a sizzling hot plate. (G.F)" },
+    { name: "Lamb Chop", price: "$25.99", desc: "Succulent lamb infused with a flavorful blend of herbs, spices, mustard oil, and sour cream, paired with grilled onions and bell peppers on a sizzling hot plate. (G.F)" },
+    { name: "Tandoori Shrimp", price: "$23.99", desc: "Juicy shrimp marinated in a flavorful blend of herbs, spices, mustard oil, and sour cream, served with grilled onions and bell peppers on a sizzling hot plate. (G.F)" },
+    { name: "Paneer Tikka Tandoori", price: "$22.99", desc: "Cubes of paneer homemade cheese marinated in herbs, spices, mustard oil, and sour cream. Served with grilled onion and bell peppers on a sizzling hot plate. (Veg, G.F)" }
   ],
-  Vegetable_Entrees: [
-    { name: "Vegetable Korma", price: "$16.99", desc: "" },
-    { name: "Paneer Tikka Masala", price: "$18.99", desc: "" },
-    { name: "Saag Paneer", price: "$16.99", desc: "" },
-    { name: "Chana Saag", price: "$16.99", desc: "" },
-    { name: "Chana Masala", price: "$15.99", desc: "" },
-    { name: "Bhindi Masala", price: "$15.99", desc: "" },
-    { name: "Baigan Bharta", price: "$15.99", desc: "" },
-    { name: "Dal Makhani", price: "$16.99", desc: "" },
-    { name: "Dal Tadka", price: "$15.99", desc: "" },
-    { name: "Aloo Gobi", price: "$15.99", desc: "" },
-    { name: "Vegetable Vindaloo", price: "$15.99", desc: "" },
-    { name: "Veg Curry", price: "$15.99", desc: "" }
+  "Vegetable Entrees": [
+    { name: "Vegetable Korma", price: "$17.99", desc: "Mixed vegetable simmered in a rich and creamy sauce of cashew nuts with herbs and spices. (Veg, G.F)" },
+    { name: "Paneer Tikka Masala", price: "$17.99", desc: "Fried cubes of home made cheese cooked in a delicious creamy tomato and onion sauce. (Veg, G.F)" },
+    { name: "Saag Paneer", price: "$17.99", desc: "Baby Spinach & fried cubes of home made cheese in tomato and onion sauce. (Veg, G.F)" },
+    { name: "Chana Sag", price: "$17.99", desc: "Fresh spinach and chickpea cooked in onion and tomato sauce. (Veg, G.F)" },
+    { name: "Chana Masala", price: "$16.99", desc: "Chick pea cooked in onion and tomato sauce with herbs and spices. (VN, G.F)" },
+    { name: "Bhindi Masala", price: "$16.99", desc: "Okra sautéed with onion, tomato, herbs and spices. (VN, G.F)" },
+    { name: "Baigan Bhatra", price: "$16.99", desc: "Roasted eggplant cooked with onion, tomato herbs and spices. (VN, G.F)" },
+    { name: "Dal Makhani", price: "$17.99", desc: "Black lentils cooked in creamy tomato sauce and with herbs and spices. (G.F)" },
+    { name: "Dal Tadka", price: "$17.99", desc: "Mixed lentils sautéed with garlic, cumin seeds and tomato. (VN, G.F)" },
+    { name: "Aloo Gobi", price: "$16.99", desc: "Fresh cauliflower and potato cooked with onion, tomato herbs and spices. (VN, G.F)" },
+    { name: "Vegetable Vindaloo", price: "$17.99", desc: "Cube cut boiled potato and mixed vegetable cooked in a vindaloo sauce. (VN, G.F)" },
+    { name: "Veg. Curry", price: "$16.99", desc: "Mixed veg, cauliflower and broccoli cooked in tomato and onion sauce with herbs and spices. (VN, G.F)" }
   ],
-  Chicken_Entrees: [
-    { name: "Chicken Curry", price: "$17.99", desc: "" },
-    { name: "Butter Chicken", price: "$18.99", desc: "" },
-    { name: "Chicken Tikka Masala", price: "$18.99", desc: "" },
-    { name: "Chicken Vindaloo", price: "$17.99", desc: "" },
-    { name: "Chicken with Veg Curry", price: "$17.99", desc: "" },
-    { name: "Chicken Madras", price: "$17.99", desc: "" },
-    { name: "Chicken Korma", price: "$17.99", desc: "" },
-    { name: "Chicken Saag", price: "$18.99", desc: "" },
-    { name: "Chicken Dhansak Korma", price: "$17.99", desc: "" }
+  "Chicken Entrees": [
+    { name: "Chicken Curry", price: "$18.99", desc: "Boneless chicken cooked in a onion and tomato with herbs and spices. (G.F)" },
+    { name: "Butter Chicken", price: "$19.99", desc: "Grilled boneless chicken cooked in creamy tomato sauce with mild spices. (G.F)" },
+    { name: "Chicken Tikka Masala", price: "$19.99", desc: "Grilled boneless chicken cooked in a tomato creamy tomato and onion sauce with mild spices. (G.F)" },
+    { name: "Chicken Vindaloo", price: "$18.99", desc: "Boneless chicken and potato cooked in a vindaloo sauce. (G.F)" },
+    { name: "Chicken with Veg Curry", price: "$18.99", desc: "Boneless chicken sautéed with fresh vegetables, herbs and spices. (G.F)" },
+    { name: "Chiken Madras", price: "$18.99", desc: "Boneless chicken cooked in coconut milk with mustard seeds, whole chilli peppers, curry leaf, herbs and spices. (G.F)" },
+    { name: "Chicken Korma", price: "$19.99", desc: "Boneless chicken cooked with cashews in a creamy onion and tomato sauce. (G.F)" },
+    { name: "Chicken Sag", price: "$19.99", desc: "Boneless chicken and fresh spinach cooked in an onion and tomato sauce. (G.F)" },
+    { name: "Chicken Dhaniya Korma", price: "$19.99", desc: "Boneless chicken cooked with mint chutney in a creamy onion and tomato sauce. (G.F)" }
   ],
-  Lamb_Entrees: [
-    { name: "Lamb Curry", price: "$19.99", desc: "" },
-    { name: "Lamb Vindaloo", price: "$19.99", desc: "" },
-    { name: "Lamb Korma", price: "$19.99", desc: "" },
-    { name: "Lamb Saag", price: "$20.99", desc: "" },
-    { name: "Lamb with Veg Curry", price: "$19.99", desc: "" },
-    { name: "Lamb Tikka Masala", price: "$20.99", desc: "" },
-    { name: "Lamb Madras", price: "$19.99", desc: "" }
+  "Lamb Entrees": [
+    { name: "Lamb Curry", price: "$20.99", desc: "Boneless lamb cooked in tomato and onion sauce with herbs and spices. (G.F)" },
+    { name: "Lamb Vindaloo", price: "$20.99", desc: "Boneless lamb and potato cooked in vindaloo sauce with herbs & spices. (G.F)" },
+    { name: "Lamb Korma", price: "$21.99", desc: "Boneless lamb cooked with cashews in creamy onion and tomato sauce. (G.F)" },
+    { name: "Lamb Sag", price: "$20.99", desc: "Boneless lamb and fresh spinach cooked in an onion and tomato sauce. (G.F)" },
+    { name: "Lamb with Veg. Curry", price: "$20.99", desc: "Boneless lamb sautéed with fresh vegetables, herbs and spices. (G.F)" },
+    { name: "Lamb Tikka Masala", price: "$21.99", desc: "Boneless lamb sautéed with creamy tomato and onion sauce. (G.F)" },
+    { name: "Lamb Madras", price: "$21.99", desc: "Boneless lamb cooked in coconut milk with mustard seeds, whole chilli pepper, curry leaf, herbs and spices. (G.F)" }
   ],
-  Shrimp_Entrees: [
-    { name: "Shrimp Curry", price: "$20.99", desc: "" },
-    { name: "Shrimp with Veg Curry", price: "$20.99", desc: "" },
-    { name: "Shrimp Madras", price: "$20.99", desc: "" },
-    { name: "Shrimp Vindaloo", price: "$20.99", desc: "" },
-    { name: "Shrimp Korma", price: "$20.99", desc: "" },
-    { name: "Shrimp Masala", price: "$21.99", desc: "" }
+  "Shrimp Entrees": [
+    { name: "Shrimp Curry", price: "$21.99", desc: "Fresh shrimp cooked in tomato and onion with herbs and spices. (G.F)" },
+    { name: "Shrimp with Veg. Curry", price: "$21.99", desc: "Fresh shrimp sautéed with fresh vegetables, herbs and spices. (G.F)" },
+    { name: "Shrimp Madras", price: "$22.99", desc: "Fresh shrimp cooked in coconut milk with mustard seed, whole chilli pepper, curry leaf, herbs and spices. (G.F)" },
+    { name: "Shrimp Vindalo", price: "$21.99", desc: "Fresh shrimp and cube cut boiled potato cooked in vindaloo sauce, herbs & spices. (G.F)" },
+    { name: "Shrimp Korma", price: "$22.99", desc: "Fresh shrimp cooked with cashews in a creamy sauce. (G.F)" },
+    { name: "Shrimp Masala", price: "$22.99", desc: "Fresh shrimp cooked in creamy tomato and onion sauce with mild herbs and spices. (G.F)" }
   ],
-  Biryani_And_Rice: [
-    { name: "Plain White Rice", price: "$4.00", desc: "" },
-    { name: "Vegetable Biryani", price: "$16.99", desc: "" },
-    { name: "Chicken Biryani", price: "$17.99", desc: "" },
-    { name: "Lamb Biryani", price: "$19.99", desc: "" },
-    { name: "Shrimp Biryani", price: "$20.99", desc: "" }
+
+ "Biryani & Rice": [
+    { name: "Vegetable Biryani", price: "$16.99", desc: "Basmati rice cooked with mixed vegetable, herbs and spices. (Veg, G.F)" },
+    { name: "Chicken Biryani", price: "$17.99", desc: "Basmati rice and tender pieces of chicken cooked with herbs and spices. (G.F)" },
+    { name: "Lamb Biryani", price: "$19.99", desc: "Basmati rice and tender pieces of lamb cooked with herbs and spices. (G.F)" },
+    { name: "Shrimp Biryani", price: "$20.99", desc: "Basmati rice and shrimp cooked with herbs and spices. (G.F)" }
   ],
-  Breads: [
-    { name: "Naan", price: "$4.00", desc: "" },
-    { name: "Garlic Naan", price: "$5.00", desc: "" },
-    { name: "Coconut Naan", price: "$5.50", desc: "" },
-    { name: "Aloo Naan", price: "$5.00", desc: "" },
-    { name: "Onion Kulcha", price: "$5.00", desc: "" },
-    { name: "Roti", price: "$4.00", desc: "" },
-    { name: "Aloo Paratha", price: "$5.00", desc: "" },
-    { name: "Lachha Paratha", price: "$5.00", desc: "" },
-    { name: "Bread Basket", price: "$14.00", desc: "" }
+  "Naan & Roti": [
+    { name: "Naan", price: "$4.99", desc: "Leavened white bread baked in a Tandoor oven." },
+    { name: "Garlic Naan", price: "$5.99", desc: "Leavened white bread topped with freshly chopped garlic and cilantro, baked in a Tandoor oven." },
+    { name: "Coconut Naan", price: "$5.99", desc: "Leavened white soft bread stuffed with coconut and baked in a Tandoor oven." },
+    { name: "Onion Kulcha", price: "$5.99", desc: "Leavened white soft bread stuffed with onion and freshly chopped onion and baked in a Tandoor oven." },
+    { name: "Aloo Naan", price: "$5.99", desc: "Leavened white soft bread stuffed with potato and baked in a Tandoor oven." },
+    { name: "Roti", price: "$4.99", desc: "Whole wheat soft bread baked in a Tandoor oven." },
+    { name: "Aloo Paratha", price: "$5.99", desc: "Whole wheat soft bread stuffed with potato and baked in a Tandoor oven." },
+    { name: "Lachha Paratha", price: "$5.99", desc: "Layered whole wheat bread, baked in a Tandoor oven." },
+    { name: "Bread Basket", price: "$14.99", desc: "Layered whole wheat bread, baked in a Tandoor oven." }
   ],
   Desserts: [
-    { name: "Gulab Jamun", price: "$5.00", desc: "" },
-    { name: "Kheer", price: "$5.00", desc: "" },
-    { name: "Gajar Halwa", price: "$6.00", desc: "" }
+    { name: "Gulab Jamun", price: "$5.99", desc: "Fried pastry dumplings in a sweet saffron syrup." },
+    { name: "Kheer", price: "$5.99", desc: "Rice cooked in a creamy sweetest milk." },
+    { name: "Gajar Halwa", price: "$6.99", desc: "A Carrot dish, fudgy texture enhanced with cardamom and dry fruits" }
   ],
   Beverages: [
-    { name: "Soda Can", price: "$2.00", desc: "" },
-    { name: "Mango Lassi", price: "$4.99", desc: "" },
-    { name: "Milk Tea", price: "$3.50", desc: "" },
-    { name: "Black Tea", price: "$2.99", desc: "" }
+    { name: "Soda Can", price: "$2.99", desc: "Coke, Pepsi, Sprite, Ginger Ale." },
+    { name: "Mango Lassi", price: "$4.99", desc: "Smoothie drink, mango pulp and yogurt mixed." },
+    { name: "Milk Tea", price: "$3.99", desc: "Milk cooked with tea leaf and spices." },
+    { name: "Black Tea", price: "$2.99", desc: "Tea leaf cooked in water with spices." }
   ],
-  Sauces_And_Pickles: [
+  "Sauces & Pickles": [
     { name: "Tamarind Sauce, 8 oz.", price: "$4.99", desc: "" },
     { name: "Green Chutney, 8 oz.", price: "$4.99", desc: "" },
     { name: "Mango Chutney, 8 oz.", price: "$4.99", desc: "" },
-    { name: "Raita, 8 oz.", price: "$4.00", desc: "" }
+    { name: "Raita, 8 oz.", price: "$4.99", desc: "" }
   ]
 };
 
