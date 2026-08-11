@@ -7,7 +7,7 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — Himalchuli Bar & Grill" },
-      { name: "description", content: "Get in touch with Himalchuli Bar & Grill in Washington DC. Address, phone, hours and message form." },
+      { name: "description", content: "Get in touch with Himalchuli Bar & Grill in Haverhill MA. Address, phone, hours and message form." },
       { property: "og:title", content: "Contact Himalchuli Bar & Grill" },
       { property: "og:description", content: "Visit or reach out — we'd love to hear from you." },
     ],
@@ -16,14 +16,24 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+//   const schedule = [
+//   { day: "Sunday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+//   { day: "Monday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+//   { day: "Tuesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+//   { day: "Wednesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+//   { day: "Thursday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+//   { day: "Friday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+//   { day: "Saturday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+// ];
+
   const schedule = [
-  { day: "Sunday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
-  { day: "Monday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-  { day: "Tuesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-  { day: "Wednesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-  { day: "Thursday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-  { day: "Friday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-  { day: "Saturday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+  { day: "Sunday", hours: ["11:00 AM – 10:30 PM"] },
+  { day: "Monday", hours: ["11:00 AM – 10:00 PM"] },
+  { day: "Tuesday", hours: ["11:00 AM – 10:00 PM"] },
+  { day: "Wednesday", hours: ["11:00 AM – 10:00 PM"] },
+  { day: "Thursday", hours: ["11:00 AM – 10:00 PM"] },
+  { day: "Friday", hours: ["11:00 AM – 10:00 PM"] },
+  { day: "Saturday", hours: ["11:00 AM – 10:30 PM"] },
 ];
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   return (
