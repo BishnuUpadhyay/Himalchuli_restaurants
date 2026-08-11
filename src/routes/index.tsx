@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { UtensilsCrossed, ChefHat, ShoppingBag, HeartHandshake, Star } from "lucide-react";
+import { UtensilsCrossed, ChefHat, ShoppingBag, HeartHandshake, Star, Instagram, Facebook} from "lucide-react";
 import heroMomo from "@/assets/hero-momo.jpg";
 import heroInterior from "@/assets/hero-interior.jpg";
 import dishTikka from "@/assets/dish-tikka.jpg";
@@ -85,7 +85,7 @@ function Index() {
           <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">About Us</p>
           <h2 className="mt-3 font-display text-4xl font-bold uppercase tracking-wide md:text-5xl">Welcome to Himalchuli Bar & Grill</h2>
           <p className="mt-6 leading-relaxed text-muted-foreground">
-            Bringing the true essence of Himalayan hospitality to Washington DC, Himalchuli Bar & Grill offers an authentic culinary journey through the vibrant flavors of Nepal, Tibet, and India. Named after Himalchuli, the seventh-highest mountain in the world rising in the Nepalese Himalayas, our kitchen blends time-honored family recipes with traditional mountain cooking.
+            Bringing the true essence of Himalayan hospitality to Haverhill, MA, Himalchuli Bar & Grill offers an authentic culinary journey through the vibrant flavors of Nepal, Tibet, and India. Named after Himalchuli, the seventh-highest mountain in the world rising in the Nepalese Himalayas, our kitchen blends time-honored family recipes with traditional mountain cooking.
           </p>
           <p className="mt-4 leading-relaxed text-muted-foreground">
             From meticulously hand-folded momos to the deep, smoky notes of our clay tandoor, every dish is crafted with purpose — hand-ground spices, fresh produce and heritage techniques for a perfect balance of comfort and flavor.
@@ -178,8 +178,6 @@ function Index() {
           </div>
         </div>
       </section>
-
-
 
       {/* Testimonials */}
       {/* <section className="mx-auto max-w-7xl px-4 py-24 md:px-8">

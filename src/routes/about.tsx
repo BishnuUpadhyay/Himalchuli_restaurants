@@ -6,7 +6,7 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — Himalchuli Bar & Grill" },
-      { name: "description", content: "Our story: bringing authentic Himalayan and Indian cuisine to Washington DC with heritage recipes and hand-ground spices." },
+      { name: "description", content: "Our story: bringing authentic Himalayan and Indian cuisine to Haverhill MA with heritage recipes and hand-ground spices." },
       { property: "og:title", content: "About Himalchuli Bar & Grill" },
       { property: "og:description", content: "Our story: Himalayan hospitality in the heart of DC." },
     ],
@@ -23,7 +23,7 @@ function AboutPage() {
           <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">About Us</p>
           <h1 className="mt-3 font-display text-5xl font-bold uppercase tracking-wide text-white md:text-6xl">Our Story</h1>
           <p className="mt-6 text-lg leading-relaxed text-white/80">
-            A family-run kitchen bringing the flavors of the Himalayas to Washington DC.
+            A family-run kitchen bringing the flavors of the Himalayas to Haverhill MA.
           </p>
         </div>
       </section>
