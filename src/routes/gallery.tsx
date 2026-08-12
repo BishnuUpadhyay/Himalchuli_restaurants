@@ -9,6 +9,7 @@ import samosaPlate from "@/assets/samosa-plate.jpg";
 import sizzler from "@/assets/sizzler.jpg";
 import friedMomo from "@/assets/fried-momo.jpg";
 import paneerTikka from "@/assets/paneer-tikka.jpg";
+import heroInterior from "@/assets/hero-interior.jpg";
 
 export const Route = createFileRoute("/gallery")({
     head: () => ({
@@ -39,14 +40,17 @@ const photos = [
     { src: garlicNaan, alt: "Garlic naan" },
     { src: lambCurry, alt: "Lamb Curry" },
     { src: saag, alt: "Saag Paneer" },
-    { src: samosaPlate, alt: "Vegetable samoda" },
-    { src: pakora, alt: "Mixed Veg. Pakoda" },
+    { src: samosaPlate, alt: "Vegetable samosa" },
+    // { src: pakora, alt: "Mixed Veg. Pakoda" },
 ];
 
-function Gallery() {
+export function Gallery({ fromhome }: { fromhome?: boolean }) {
     return (
-        <section className="bg-surface py-24">
-            <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <section className="relative isolate overflow-hidden bg-surface py-24">
+            <img src={heroInterior} alt="" aria-hidden width={1600} height={900} loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-20" />
+            <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/70 to-surface/20" />
+
+            <div className="relative mx-auto max-w-7xl px-4 md:px-8">
                 <div className="text-center">
                     <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">
                         Gallery
@@ -59,7 +63,7 @@ function Gallery() {
                     </p>
                 </div>
 
-                <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-14 grid gap-6 grid-cols-2  sm:grid-cols-2 lg:grid-cols-4">
                     {photos.map((p) => (
                         <figure
                             key={p.alt}
@@ -71,7 +75,7 @@ function Gallery() {
                                 width={800}
                                 height={800}
                                 loading="lazy"
-                                className="h-72 w-full object-cover transition duration-700 [filter:saturate(1.12)_contrast(1.06)_brightness(0.96)] group-hover:scale-105"
+                                className="h-60 sm:h-72 w-full object-cover transition duration-700 [filter:saturate(1.12)_contrast(1.06)_brightness(0.96)] group-hover:scale-105"
                             />
                             {/* warm brand grade to unify the photos with the site theme */}
                             <span
@@ -89,36 +93,36 @@ function Gallery() {
                     ))}
                 </div>
 
-                <div className="mt-16 flex flex-col items-center gap-3">
-                    <a
-                        href="https://www.facebook.com/profile.php?id=61592058508609"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-3 rounded-full border border-primary/60 px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-primary hover:text-primary-foreground"
-                    >
-                        <Facebook className="h-4 w-4" />
-                        Follow Us On Facebook
-                        <ArrowRight className="h-4 w-4" />
-                    </a>
-                         <a
-                        href="https://www.instagram.com/himalchuli2026?igsh=MWw5bWRvaWpncHgxcg=="
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-3 rounded-full border border-primary/60 px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-primary hover:text-primary-foreground"
-                    >
-                        <Instagram className="h-4 w-4" />
-                        Follow Us On Instagram
-                        <ArrowRight className="h-4 w-4" />
-                    </a>
-                    <p className="text-xs uppercase tracking-wider text-white/50">
-                        @himalchulibarandgrill
-                    </p>
-                    <Link
-                        to="/menu"
-                        className="mt-6 text-sm font-semibold uppercase tracking-wider text-primary hover:underline"
-                    >
+                <div className="mt-16 flex  flex-col items-center gap-3">
+
+                    <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+                        <a
+                            href="https://www.facebook.com/profile.php?id=61592058508609"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-3 rounded-full border border-primary/60 px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-primary hover:text-primary-foreground"
+                        >
+                            <Facebook className="h-4 w-4" />
+                            Follow Us On Facebook
+                            <ArrowRight className="h-4 w-4" />
+                        </a>
+                        <a
+                            href="https://www.instagram.com/himalchuli2026?igsh=MWw5bWRvaWpncHgxcg=="
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-3 rounded-full border border-primary/60 px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-primary hover:text-primary-foreground"
+                        >
+                            <Instagram className="h-4 w-4" />
+                            Follow Us On Instagram
+                            <ArrowRight className="h-4 w-4" />
+                        </a>
+
+                    </div>
+
+
+                    {fromhome ? null : <Link to="/menu" className="mt-6 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-primary-foreground transition hover:bg-primary/90">
                         View Full Menu
-                    </Link>
+                    </Link>}
                 </div>
             </div>
         </section>

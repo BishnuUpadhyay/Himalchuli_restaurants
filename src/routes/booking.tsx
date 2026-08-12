@@ -121,23 +121,15 @@ function BookingPage() {
 
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-surface py-20 text-center">
-        <img
-          src={heroInterior}
-          alt=""
-          aria-hidden
-          width={1600}
-          height={900}
-          className="absolute inset-0 h-full w-full object-cover opacity-25"
-        />
-        <div className="relative">
+      <section className="relative isolate overflow-hidden bg-surface py-24">
+        <img src={heroInterior} alt="" aria-hidden width={1600} height={900} className="absolute inset-0 h-full w-full object-cover opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/70 to-surface/20" />
+        <div className="relative mx-auto max-w-4xl px-4 text-center md:px-8">
           <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">
             Reservation
           </p>
-          <h1 className="mt-3 font-display text-5xl font-bold uppercase tracking-wide text-foreground md:text-6xl">
-            Book a Table
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl px-4 text-sm text-muted-foreground">
+          <h1 className="mt-3 font-display text-5xl font-bold uppercase tracking-wide text-white md:text-6xl">  Book a Table</h1>
+          <p className="mt-6 text-lg leading-relaxed text-white/80">
             Live table availability. Choose a time, tell us how to seat you, and get an instant confirmation.
           </p>
         </div>
@@ -148,13 +140,12 @@ function BookingPage() {
           {stepTitles.map((title, i) => (
             <li
               key={title}
-              className={`flex items-center gap-2 rounded-full border px-4 py-2 font-semibold ${
-                i === step
-                  ? "border-primary bg-primary/10 text-primary"
-                  : i < step
-                    ? "border-border text-muted-foreground"
-                    : "border-border/50 text-muted-foreground/60"
-              }`}
+              className={`flex items-center gap-2 rounded-full border px-4 py-2 font-semibold ${i === step
+                ? "border-primary bg-primary/10 text-primary"
+                : i < step
+                  ? "border-border text-muted-foreground"
+                  : "border-border/50 text-muted-foreground/60"
+                }`}
             >
               <span>{i + 1}</span>
               {title}
@@ -189,11 +180,10 @@ function BookingPage() {
                         setGuestCount(n);
                         setTime(null);
                       }}
-                      className={`h-11 w-11 rounded-md border text-sm font-semibold transition-colors ${
-                        guestCount === n
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border hover:border-primary"
-                      }`}
+                      className={`h-11 w-11 rounded-md border text-sm font-semibold transition-colors ${guestCount === n
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border hover:border-primary"
+                        }`}
                     >
                       {n}
                     </button>
@@ -223,13 +213,12 @@ function BookingPage() {
                         type="button"
                         disabled={!slot.available}
                         onClick={() => setTime(slot.time)}
-                        className={`rounded-md border px-2 py-3 text-sm font-semibold transition-colors ${
-                          time === slot.time
-                            ? "border-primary bg-primary text-primary-foreground"
-                            : slot.available
-                              ? "border-border hover:border-primary"
-                              : "cursor-not-allowed border-border/40 text-muted-foreground/40 line-through"
-                        }`}
+                        className={`rounded-md border px-2 py-3 text-sm font-semibold transition-colors ${time === slot.time
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : slot.available
+                            ? "border-border hover:border-primary"
+                            : "cursor-not-allowed border-border/40 text-muted-foreground/40 line-through"
+                          }`}
                       >
                         {slot.label}
                       </button>
@@ -462,9 +451,8 @@ function PreferenceButton({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-md border px-4 py-3 text-sm font-semibold transition-colors ${
-        active ? "border-primary bg-primary/10 text-primary" : "border-border hover:border-primary"
-      }`}
+      className={`rounded-md border px-4 py-3 text-sm font-semibold transition-colors ${active ? "border-primary bg-primary/10 text-primary" : "border-border hover:border-primary"
+        }`}
     >
       {label}
     </button>

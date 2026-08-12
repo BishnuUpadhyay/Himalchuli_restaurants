@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import heroInterior from "@/assets/hero-interior.jpg";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -16,31 +17,41 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
-//   const schedule = [
-//   { day: "Sunday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
-//   { day: "Monday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-//   { day: "Tuesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-//   { day: "Wednesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-//   { day: "Thursday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-//   { day: "Friday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-//   { day: "Saturday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
-// ];
+  //   const schedule = [
+  //   { day: "Sunday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+  //   { day: "Monday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  //   { day: "Tuesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  //   { day: "Wednesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  //   { day: "Thursday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  //   { day: "Friday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+  //   { day: "Saturday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+  // ];
 
   const schedule = [
-  { day: "Sunday", hours: ["11:00 AM – 10:30 PM"] },
-  { day: "Monday", hours: ["11:00 AM – 10:00 PM"] },
-  { day: "Tuesday", hours: ["11:00 AM – 10:00 PM"] },
-  { day: "Wednesday", hours: ["11:00 AM – 10:00 PM"] },
-  { day: "Thursday", hours: ["11:00 AM – 10:00 PM"] },
-  { day: "Friday", hours: ["11:00 AM – 10:00 PM"] },
-  { day: "Saturday", hours: ["11:00 AM – 10:30 PM"] },
-];
+    { day: "Sunday", hours: ["11:00 AM – 10:30 PM"] },
+    { day: "Monday", hours: ["11:00 AM – 10:00 PM"] },
+    { day: "Tuesday", hours: ["11:00 AM – 10:00 PM"] },
+    { day: "Wednesday", hours: ["11:00 AM – 10:00 PM"] },
+    { day: "Thursday", hours: ["11:00 AM – 10:00 PM"] },
+    { day: "Friday", hours: ["11:00 AM – 10:00 PM"] },
+    { day: "Saturday", hours: ["11:00 AM – 10:30 PM"] },
+  ];
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   return (
     <>
-      <section className="bg-surface py-20 text-center">
-        <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">Contact</p>
-        <h1 className="mt-3 font-display text-5xl font-bold uppercase tracking-wide text-white md:text-6xl">Get in Touch</h1>
+      <section className="relative isolate overflow-hidden bg-surface py-20 text-center">
+        <img
+          src={heroInterior}
+          alt=""
+          aria-hidden
+          width={1600}
+          height={900}
+          className="absolute inset-0 h-full w-full object-cover opacity-25"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/70 to-surface/20" />
+        <div className="relative mx-auto max-w-4xl px-4 text-center md:px-8"> <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">Contact</p>
+          <h1 className="mt-3 font-display text-5xl font-bold uppercase tracking-wide text-white md:text-6xl">Get in Touch</h1></div>
+
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-20 md:grid-cols-3 md:px-8">
@@ -58,32 +69,32 @@ function ContactPage() {
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-10 px-4 pb-24 md:grid-cols-2 md:px-8">
-       <div>
-  <h2 className="font-display text-3xl font-bold uppercase tracking-wide">Opening Hours</h2>
-  <ul className="mt-6 space-y-3 text-sm">
-    {[
-      { day: "Sunday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
-      { day: "Monday", hours: ["Closed"] },
-      { day: "Tuesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-      { day: "Wednesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-      { day: "Thursday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-      { day: "Friday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-      { day: "Saturday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
-    ].map((item) => (
-      <li key={item.day} className="flex items-start justify-between border-b border-border pb-3">
-        <span className="flex items-center gap-2 font-semibold">
-          <Clock className="h-4 w-4 text-primary" />
-          {item.day}
-        </span>
-        <div className="text-right text-muted-foreground">
-          {item.hours.map((time, idx) => (
-            <div key={idx}>{time}</div>
-          ))}
+        <div>
+          <h2 className="font-display text-3xl font-bold uppercase tracking-wide">Opening Hours</h2>
+          <ul className="mt-6 space-y-3 text-sm">
+            {[
+              { day: "Sunday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+              { day: "Monday", hours: ["Closed"] },
+              { day: "Tuesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+              { day: "Wednesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+              { day: "Thursday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+              { day: "Friday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+              { day: "Saturday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+            ].map((item) => (
+              <li key={item.day} className="flex items-start justify-between border-b border-border pb-3">
+                <span className="flex items-center gap-2 font-semibold">
+                  <Clock className="h-4 w-4 text-primary" />
+                  {item.day}
+                </span>
+                <div className="text-right text-muted-foreground">
+                  {item.hours.map((time, idx) => (
+                    <div key={idx}>{time}</div>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-      </li>
-    ))}
-  </ul>
-</div>
 
         <form
           onSubmit={(e) => {

@@ -1,15 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { UtensilsCrossed, ChefHat, ShoppingBag, HeartHandshake, Star, Instagram, Facebook} from "lucide-react";
+import { UtensilsCrossed, ChefHat, ShoppingBag, HeartHandshake, Star, Instagram, Facebook, ArrowRight } from "lucide-react";
 import heroMomo from "@/assets/hero-momo.jpg";
 import heroInterior from "@/assets/hero-interior.jpg";
-import dishTikka from "@/assets/dish-tikka.jpg";
-import dishMomo from "@/assets/dish-momo.jpg";
-import dishSekuwa from "@/assets/dish-sekuwa.jpg";
-import dishSamosa from "@/assets/dish-samosa.jpg";
-import dishPaneer from "@/assets/dish-paneer.jpg";
-import dishGobi from "@/assets/dish-gobi.jpg";
 import dishdefault from "@/assets/dish-default.png";
+import { Gallery } from "./gallery";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -23,10 +18,10 @@ const features = [
 ];
 
 const popular = [
-{ name: "Chicken Momo",price: "From $17.99", desc: "Chicken stuffed dumplings seasoned with Nepalese herbs and spices. Style choices: Steamed (+$0), Fried (+$1), Chilli (+$2)." },  { name: "Goat Curry", price: "$20.99", tag: "", desc: "Tender goat meat slow-cooked in a rich, aromatic gravy of caramelized onions, garlic, ginger, and traditional whole spices.", img: dishdefault },
-{name: "Tandoori Chicken", price: "$20.99", tag: "", desc: "Half chicken marinated in herbs, spices, mustard oil, and yogurt. Served with grilled onion and bell peppers on a sizzling hot plate.", img: dishdefault },
-{ name: "Chowmein",  price: "From $16.99", desc: "Shredded fresh vegetables and noodles cooked with herbs and spices. Protein choices: Veg (+$0), Chicken (+$1), Shrimp (+$3), Lamb (+$4)." },  { name: "Samosa Chaat", price: "$12.99", tag: "", desc: "Crispy potato samosas crushed over warm chickpea curry, layered with yogurt, tamarind and mint chutneys, and topped with sev, onions, and cilantro.", img: dishdefault },
-{ name: "Gobi Manchurian",price: "$12.99", tag: "Veg, VN", desc: "Crispy cauliflower tossed in a spicy sweet and tangy sauce with soy sauce, vinegar and chilli sauce.",  img: dishdefault }
+  { name: "Chicken Momo", price: "From $17.99", desc: "Chicken stuffed dumplings seasoned with Nepalese herbs and spices. Style choices: Steamed (+$0), Fried (+$1), Chilli (+$2)." }, { name: "Goat Curry", price: "$20.99", tag: "", desc: "Tender goat meat slow-cooked in a rich, aromatic gravy of caramelized onions, garlic, ginger, and traditional whole spices.", img: dishdefault },
+  { name: "Tandoori Chicken", price: "$20.99", tag: "", desc: "Half chicken marinated in herbs, spices, mustard oil, and yogurt. Served with grilled onion and bell peppers on a sizzling hot plate.", img: dishdefault },
+  { name: "Chowmein", price: "From $16.99", desc: "Shredded fresh vegetables and noodles cooked with herbs and spices. Protein choices: Veg (+$0), Chicken (+$1), Shrimp (+$3), Lamb (+$4)." }, { name: "Samosa Chaat", price: "$12.99", tag: "", desc: "Crispy potato samosas crushed over warm chickpea curry, layered with yogurt, tamarind and mint chutneys, and topped with sev, onions, and cilantro.", img: dishdefault },
+  { name: "Gobi Manchurian", price: "$12.99", tag: "Veg, VN", desc: "Crispy cauliflower tossed in a spicy sweet and tangy sauce with soy sauce, vinegar and chilli sauce.", img: dishdefault }
 ];
 
 const testimonials = [
@@ -178,6 +173,8 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <Gallery fromhome={true} />
 
       {/* Testimonials */}
       {/* <section className="mx-auto max-w-7xl px-4 py-24 md:px-8">

@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { createFileRoute } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { useState } from "react";
+import heroInterior from "@/assets/hero-interior.jpg";
 
 export const Route = createFileRoute("/menu")({
   head: () => ({
@@ -150,58 +151,70 @@ function MenuPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-surface py-20 text-center">
-        <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">
-          Our Menu
-        </p>
-        <h1 className="mt-3 font-display text-5xl font-bold uppercase tracking-wide text-white md:text-6xl">
-          Explore the Flavors
-        </h1>
-        <p className="mx-auto mt-4 max-w-xl px-4 text-white/70">
-          A curated selection of Himalayan and Indian classics.
-        </p>
+      <section className="relative isolate overflow-hidden bg-surface py-20 text-center">
+        <img
+          src={heroInterior}
+          alt=""
+          aria-hidden
+          width={1600}
+          height={900}
+          className="absolute inset-0 h-full w-full object-cover opacity-25"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/70 to-surface/20" />
+        <div className="relative mx-auto max-w-4xl px-4 text-center md:px-8">
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">
+            Our Menu
+          </p>
+          <h1 className="mt-3 font-display text-5xl font-bold uppercase tracking-wide text-white md:text-6xl">
+            Explore the Flavors
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl px-4 text-white/70">
+            A curated selection of Himalayan and Indian classics.
+          </p>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Dialog open={menuOpen} onOpenChange={setMenuOpen}>
-            <DialogTrigger asChild>
-              <Button
-                size="lg"
-                variant="outline"
-                className="min-h-12 min-w-[10rem] border-white/30 bg-white text-surface hover:bg-white/90 hover:text-surface sm:min-w-[12rem]"
-              >
-                Open Full Menu
-              </Button>
-            </DialogTrigger>
-
-            <DialogContent
-              className="flex h-[92dvh] w-[95vw] max-w-4xl flex-col gap-0 overflow-hidden p-0 sm:h-[90vh] [&>button]:hidden"
-            >
-              {/* Header — dedicated space so the close button never sits under the iframe */}
-              <div className="flex shrink-0 items-center justify-between border-b border-border bg-card px-4 py-3">
-                <p className="font-display text-sm font-semibold uppercase tracking-wide text-foreground">
-                  Full Menu
-                </p>
-                <button
-                  onClick={() => setMenuOpen(false)}
-                  aria-label="Close menu"
-                  className="rounded-full p-1.5 text-muted-foreground hover:bg-muted"
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Dialog open={menuOpen} onOpenChange={setMenuOpen}>
+              <DialogTrigger asChild>
+                <Button
+                  size="lg"
+                  variant="default"
+                  className="mt-2 rounded-md bg-primary px-5 py-2.5 text-center text-sm font-semibold uppercase tracking-wider text-primary-foreground"
                 >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
+                  Open Full Menu
+                </Button>
 
-              {/* PDF viewer */}
-              <div className="relative flex-1 bg-muted">
-                <iframe
-                  src={MENU_PDF_EMBED_URL}
-                  title="Restaurant menu PDF"
-                  className="h-full w-full border-0"
-                  allow="autoplay"
-                  loading="lazy"
-                />
-              </div>
-            </DialogContent>
-          </Dialog>
+              </DialogTrigger>
+
+              <DialogContent
+                className="flex h-[92dvh] w-[95vw] max-w-4xl flex-col gap-0 overflow-hidden p-0 sm:h-[90vh] [&>button]:hidden"
+              >
+                {/* Header — dedicated space so the close button never sits under the iframe */}
+                <div className="flex shrink-0 items-center justify-between border-b border-border bg-card px-4 py-3">
+                  <p className="font-display text-sm font-semibold uppercase tracking-wide text-foreground">
+                    Full Menu
+                  </p>
+                  <button
+                    onClick={() => setMenuOpen(false)}
+                    aria-label="Close menu"
+                    className="rounded-full p-1.5 text-muted-foreground hover:bg-muted"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+
+                {/* PDF viewer */}
+                <div className="relative flex-1 bg-muted">
+                  <iframe
+                    src={MENU_PDF_EMBED_URL}
+                    title="Restaurant menu PDF"
+                    className="h-full w-full border-0"
+                    allow="autoplay"
+                    loading="lazy"
+                  />
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
       </section>
 

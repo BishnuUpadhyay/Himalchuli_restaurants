@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import heroInterior from "@/assets/hero-interior.jpg";
 import heroTandoor from "@/assets/hero-tandoor.jpg";
 
+
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
@@ -18,7 +19,9 @@ function AboutPage() {
   return (
     <>
       <section className="relative isolate overflow-hidden bg-surface py-24">
-        <img src={heroTandoor} alt="" aria-hidden width={1600} height={900} className="absolute inset-0 h-full w-full object-cover opacity-30" />
+        <img src={heroInterior} alt="" aria-hidden width={1600} height={900} className="absolute inset-0 h-full w-full object-cover opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/70 to-surface/20" />
+
         <div className="relative mx-auto max-w-4xl px-4 text-center md:px-8">
           <p className="font-display text-sm font-semibold uppercase tracking-[0.4em] text-primary">About Us</p>
           <h1 className="mt-3 font-display text-5xl font-bold uppercase tracking-wide text-white md:text-6xl">Our Story</h1>
