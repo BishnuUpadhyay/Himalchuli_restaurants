@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as BookingRouteImport } from './routes/booking'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as MenuRouteImport } from './routes/menu'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as StaffLoginRouteImport } from './routes/staff-login'
@@ -49,6 +50,11 @@ const BookingRoute = BookingRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MenuRoute = MenuRouteImport.update({
@@ -124,6 +130,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/booking': typeof BookingRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/menu': typeof MenuRoute
   '/reset-password': typeof ResetPasswordRoute
   '/staff-login': typeof StaffLoginRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/booking': typeof BookingRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/menu': typeof MenuRoute
   '/reset-password': typeof ResetPasswordRoute
   '/staff-login': typeof StaffLoginRoute
@@ -161,6 +169,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/booking': typeof BookingRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/menu': typeof MenuRoute
   '/reset-password': typeof ResetPasswordRoute
   '/staff-login': typeof StaffLoginRoute
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/booking'
     | '/contact'
+    | '/gallery'
     | '/menu'
     | '/reset-password'
     | '/staff-login'
@@ -199,6 +209,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/booking'
     | '/contact'
+    | '/gallery'
     | '/menu'
     | '/reset-password'
     | '/staff-login'
@@ -217,6 +228,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/booking'
     | '/contact'
+    | '/gallery'
     | '/menu'
     | '/reset-password'
     | '/staff-login'
@@ -237,6 +249,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BookingRoute: typeof BookingRoute
   ContactRoute: typeof ContactRoute
+  GalleryRoute: typeof GalleryRoute
   MenuRoute: typeof MenuRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   StaffLoginRoute: typeof StaffLoginRoute
@@ -277,6 +290,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/menu': {
@@ -411,6 +431,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BookingRoute: BookingRoute,
   ContactRoute: ContactRoute,
+  GalleryRoute: GalleryRoute,
   MenuRoute: MenuRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   StaffLoginRoute: StaffLoginRoute,
