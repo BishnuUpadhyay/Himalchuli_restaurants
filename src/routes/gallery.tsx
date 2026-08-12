@@ -32,15 +32,15 @@ export const Route = createFileRoute("/gallery")({
 });
 
 const photos = [
-    { src: friedMomo, alt: "Golden fried momos served with house chilli dipping sauce" },
-    { src: paneerTikka, alt: "Chargrilled paneer tikka with peppers, onion and lemon" },
-    { src: chaat, alt: "Layered chaat with sev, pomegranate and chutneys" },
-    { src: sizzler, alt: "Smoking tandoori sizzler platter fresh off the grill" },
-    { src: garlicNaan, alt: "Garlic naan with coriander in a basket" },
-    { src: lambCurry, alt: "Slow-cooked lamb curry finished with fresh coriander" },
-    { src: saag, alt: "Creamy saag simmered with Himalayan spices" },
-    { src: samosaPlate, alt: "Crisp samosas with tamarind and mint chutneys" },
-    { src: pakora, alt: "Onion pakora with tamarind and mint chutney" },
+    { src: friedMomo, alt: "Chicken fried momos" },
+    { src: paneerTikka, alt: "Paneer Tikka Masala" },
+    { src: chaat, alt: "Samosa Chaat" },
+    { src: sizzler, alt: "Chicken Sekuwa" },
+    { src: garlicNaan, alt: "Garlic naan" },
+    { src: lambCurry, alt: "Lamb Curry" },
+    { src: saag, alt: "Saag Paneer" },
+    { src: samosaPlate, alt: "Vegetable samoda" },
+    { src: pakora, alt: "Mixed Veg. Pakoda" },
 ];
 
 function Gallery() {
