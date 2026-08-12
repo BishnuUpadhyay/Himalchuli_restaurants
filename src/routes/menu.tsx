@@ -1,4 +1,7 @@
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { createFileRoute } from "@tanstack/react-router";
+import { X } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/menu")({
@@ -24,7 +27,7 @@ export interface Item {
 
 const menu: Record<string, Item[]> = {
   Appetizers: [
-    { name: "Mountain Pear Salad", price: "From $13.99", desc: "A refreshing medley of mixed greens, cherry tomatoes, grated carrot, pomegranate seeds, and Asian pear, finished with a light, zesty Nepali-style dressing. Add protein: Veg (+$0) / Chicken (+$2) / Shrimp (+$4) / Salmon (+$6).",tag: ""},    { name: "Lentil Soup", price: "$6.99", desc: "Mixed red and peeled black lentil cooked in Indian herbs & spices. (Veg, VN, G.F)" },
+    { name: "Mountain Pear Salad", price: "From $13.99", desc: "A refreshing medley of mixed greens, cherry tomatoes, grated carrot, pomegranate seeds, and Asian pear, finished with a light, zesty Nepali-style dressing. Add protein: Veg (+$0) / Chicken (+$2) / Shrimp (+$4) / Salmon (+$6).", tag: "" }, { name: "Lentil Soup", price: "$6.99", desc: "Mixed red and peeled black lentil cooked in Indian herbs & spices. (Veg, VN, G.F)" },
     { name: "Vegetable Samosa", price: "$6.99", desc: "Triangular Indian pastries stuffed with potatoes, green peas, mild herbs & spices. (Veg, VN)" },
     { name: "Mixed Veg. Pakoda", price: "$8.99", desc: "Crispy, deep-fried Indian fritters, shredded vegetables dipped in a chickpea flour batter. (Veg, VN, G.F)" },
     { name: "Crispy Palak Chaat", price: "$12.99", desc: "Deep-fried flash-crisped spinach served with tangy tamarind chutney, cool raita, and fresh mint sauce. (VN, Veg, G.F)" },
@@ -39,7 +42,7 @@ const menu: Record<string, Item[]> = {
     { name: "Chicken Choila", price: "$12.99", desc: "Grilled chicken Oil tempered with mustard oil, fenugreek seeds, green chilli, spring onion and spices, mixed with spring onion, Szechuan pepper, sliced ginger, garlic and cilantro. (G.F)" },
     { name: "Mustang Aloo", price: "$12.99", desc: "Boiled potatoes tossed with butter oil and Nepalese herbs and spices. (Veg, G.F)" },
     { name: "Goat Curry", price: "$20.99", desc: "Tender goat meat slow-cooked in a rich, aromatic gravy of caramelized onions, garlic, ginger, and traditional whole spices." },
-    { name: "Veg. Momo", price: "From $16.99", desc: "Chopped fresh vegetable stuffed dumplings seasoned with Nepalese herbs and spices. Style options: Steamed (+$0) / Fried (+$1) / Chilli (+$2).",tag: "Veg"},  
+    { name: "Veg. Momo", price: "From $16.99", desc: "Chopped fresh vegetable stuffed dumplings seasoned with Nepalese herbs and spices. Style options: Steamed (+$0) / Fried (+$1) / Chilli (+$2).", tag: "Veg" },
     { name: "Chicken Momo", price: "$17.99", desc: "Chicken stuffed steamed dumplings seasoned with Nepalese herbs and spices. (Steamed $17.99 / Fried $18.99 / Chilli $19.99)" }
   ],
   "Tandoori Entrees": [
@@ -93,7 +96,7 @@ const menu: Record<string, Item[]> = {
     { name: "Shrimp Masala", price: "$22.99", desc: "Fresh shrimp cooked in creamy tomato and onion sauce with mild herbs and spices. (G.F)" }
   ],
 
- "Biryani & Rice": [
+  "Biryani & Rice": [
     { name: "Vegetable Biryani", price: "$16.99", desc: "Basmati rice cooked with mixed vegetable, herbs and spices. (Veg, G.F)" },
     { name: "Chicken Biryani", price: "$17.99", desc: "Basmati rice and tender pieces of chicken cooked with herbs and spices. (G.F)" },
     { name: "Lamb Biryani", price: "$19.99", desc: "Basmati rice and tender pieces of lamb cooked with herbs and spices. (G.F)" },
@@ -129,11 +132,17 @@ const menu: Record<string, Item[]> = {
   ]
 };
 
+const MENU_PDF_ID = "1I2Du87rh1oPwQN6Lme1qQ9UikumNGjEJ";
+const MENU_PDF_EMBED_URL = `https://drive.google.com/file/d/${MENU_PDF_ID}/preview`;
+const MENU_PDF_DOWNLOAD_URL = `https://drive.google.com/uc?export=download&id=${MENU_PDF_ID}`;
+
+
 const categories = Object.keys(menu);
 
 function MenuPage() {
   const [active, setActive] = useState(categories[0]);
   const items = menu[active];
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const formatLabel = (str: string) =>
     str.toLowerCase().replace(/_/g, " ").replace(/\b\w/g, (char: string) => char.toUpperCase());
@@ -151,6 +160,49 @@ function MenuPage() {
         <p className="mx-auto mt-4 max-w-xl px-4 text-white/70">
           A curated selection of Himalayan and Indian classics.
         </p>
+
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Dialog open={menuOpen} onOpenChange={setMenuOpen}>
+            <DialogTrigger asChild>
+              <Button
+                size="lg"
+                variant="outline"
+                className="min-h-12 min-w-[10rem] border-white/30 bg-white text-surface hover:bg-white/90 hover:text-surface sm:min-w-[12rem]"
+              >
+                Open Full Menu
+              </Button>
+            </DialogTrigger>
+
+            <DialogContent
+              className="flex h-[92dvh] w-[95vw] max-w-4xl flex-col gap-0 overflow-hidden p-0 sm:h-[90vh] [&>button]:hidden"
+            >
+              {/* Header — dedicated space so the close button never sits under the iframe */}
+              <div className="flex shrink-0 items-center justify-between border-b border-border bg-card px-4 py-3">
+                <p className="font-display text-sm font-semibold uppercase tracking-wide text-foreground">
+                  Full Menu
+                </p>
+                <button
+                  onClick={() => setMenuOpen(false)}
+                  aria-label="Close menu"
+                  className="rounded-full p-1.5 text-muted-foreground hover:bg-muted"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* PDF viewer */}
+              <div className="relative flex-1 bg-muted">
+                <iframe
+                  src={MENU_PDF_EMBED_URL}
+                  title="Restaurant menu PDF"
+                  className="h-full w-full border-0"
+                  allow="autoplay"
+                  loading="lazy"
+                />
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
       </section>
 
       {/* Main Menu Section */}
