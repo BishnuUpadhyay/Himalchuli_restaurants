@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Instagram, ArrowRight } from "lucide-react";
+import { Instagram, Facebook, ArrowRight } from "lucide-react";
 import pakora from "@/assets/pakora.jpg";
 import lambCurry from "@/assets/lamb-curry.jpg";
 import saag from "@/assets/saag.jpg";
@@ -91,7 +91,17 @@ function Gallery() {
 
                 <div className="mt-16 flex flex-col items-center gap-3">
                     <a
-                        href="https://www.instagram.com/"
+                        href="https://www.facebook.com/profile.php?id=61592058508609"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 rounded-full border border-primary/60 px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-primary hover:text-primary-foreground"
+                    >
+                        <Facebook className="h-4 w-4" />
+                        Follow Us On Facebook
+                        <ArrowRight className="h-4 w-4" />
+                    </a>
+                         <a
+                        href="https://www.instagram.com/himalchuli2026?igsh=MWw5bWRvaWpncHgxcg=="
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-3 rounded-full border border-primary/60 px-8 py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-primary hover:text-primary-foreground"
