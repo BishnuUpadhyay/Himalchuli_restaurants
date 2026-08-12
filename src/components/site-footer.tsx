@@ -3,12 +3,12 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export function SiteFooter() {
   const schedule = [
-    { day: "Sunday", hours: ["11:00 AM – 10:30 PM"] },
+    { day: "Sunday", hours: ["11:00 AM – 10:00 PM"] },
     { day: "Monday", hours: ["11:00 AM – 10:00 PM"] },
     { day: "Tuesday", hours: ["11:00 AM – 10:00 PM"] },
     { day: "Wednesday", hours: ["11:00 AM – 10:00 PM"] },
     { day: "Thursday", hours: ["11:00 AM – 10:00 PM"] },
-    { day: "Friday", hours: ["11:00 AM – 10:00 PM"] },
+    { day: "Friday", hours: ["11:00 AM – 10:30 PM"] },
     { day: "Saturday", hours: ["11:00 AM – 10:30 PM"] },
   ];
   return (

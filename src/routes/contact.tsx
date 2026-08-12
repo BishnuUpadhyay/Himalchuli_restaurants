@@ -73,12 +73,12 @@ function ContactPage() {
           <h2 className="font-display text-3xl font-bold uppercase tracking-wide">Opening Hours</h2>
           <ul className="mt-6 space-y-3 text-sm">
             {[
-              { day: "Sunday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+              { day: "Sunday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
               { day: "Monday", hours: ["Closed"] },
               { day: "Tuesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
               { day: "Wednesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
               { day: "Thursday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-              { day: "Friday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
+              { day: "Friday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
               { day: "Saturday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
             ].map((item) => (
               <li key={item.day} className="flex items-start justify-between border-b border-border pb-3">
