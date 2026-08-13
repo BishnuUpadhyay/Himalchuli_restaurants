@@ -70,16 +70,16 @@ function ContactPage() {
 
       <section className="mx-auto grid max-w-6xl gap-10 px-4 pb-24 md:grid-cols-2 md:px-8">
         <div>
-          <h2 className="font-display text-3xl font-bold uppercase tracking-wide">Opening Hours</h2>
+          <h2 className="font-display text-3xl font-bold uppercase tracking-wide">s</h2>
           <ul className="mt-6 space-y-3 text-sm">
             {[
-              { day: "Sunday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-              { day: "Monday", hours: ["Closed"] },
-              { day: "Tuesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-              { day: "Wednesday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-              { day: "Thursday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:00 PM"] },
-              { day: "Friday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
-              { day: "Saturday", hours: ["11:00 AM – 2:30 PM", "4:30 PM – 10:30 PM"] },
+              { day: "Sunday", hours:  ["11:00 AM – 10:00 PM"]  },
+              { day: "Monday", hours: ["11:00 AM – 10:00 PM"] },
+              { day: "Tuesday", hours: ["11:00 AM – 10:00 PM"] },
+              { day: "Wednesday", hours: ["11:00 AM – 10:00 PM"] },
+              { day: "Thursday", hours: ["11:00 AM – 10:00 PM"] },
+              { day: "Friday", hours: ["11:00 AM – 10:30 PM"] },
+              { day: "Saturday", hours: ["11:00 AM – 10:30 PM"] },
             ].map((item) => (
               <li key={item.day} className="flex items-start justify-between border-b border-border pb-3">
                 <span className="flex items-center gap-2 font-semibold">
