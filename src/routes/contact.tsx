@@ -29,7 +29,7 @@ function ContactPage() {
 
   const schedule = [
     { day: "Sunday", hours: ["11:00 AM – 10:30 PM"] },
-    { day: "Monday", hours: ["11:00 AM – 10:00 PM"] },
+    { day: "Monday", hours: ["Closed"] },
     { day: "Tuesday", hours: ["11:00 AM – 10:00 PM"] },
     { day: "Wednesday", hours: ["11:00 AM – 10:00 PM"] },
     { day: "Thursday", hours: ["11:00 AM – 10:00 PM"] },
@@ -74,7 +74,7 @@ function ContactPage() {
           <ul className="mt-6 space-y-3 text-sm">
             {[
               { day: "Sunday", hours:  ["11:00 AM – 10:00 PM"]  },
-              { day: "Monday", hours: ["11:00 AM – 10:00 PM"] },
+              { day: "Monday", hours: ["Closed"] },
               { day: "Tuesday", hours: ["11:00 AM – 10:00 PM"] },
               { day: "Wednesday", hours: ["11:00 AM – 10:00 PM"] },
               { day: "Thursday", hours: ["11:00 AM – 10:00 PM"] },
